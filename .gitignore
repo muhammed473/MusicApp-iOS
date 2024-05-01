@@ -88,3 +88,180 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+Podfile
+Podfile.lock
+MusicApp.xcworkspace/contents.xcworkspacedata
+Pods/Manifest.lock
+Pods/Pods.xcodeproj/project.pbxproj
+Pods/SDWebImage/LICENSE
+Pods/SDWebImage/README.md
+Pods/SDWebImage/SDWebImage/Core/NSButton+WebCache.h
+Pods/SDWebImage/SDWebImage/Core/NSButton+WebCache.m
+Pods/SDWebImage/SDWebImage/Core/NSData+ImageContentType.h
+Pods/SDWebImage/SDWebImage/Core/NSData+ImageContentType.m
+Pods/SDWebImage/SDWebImage/Core/NSImage+Compatibility.h
+Pods/SDWebImage/SDWebImage/Core/NSImage+Compatibility.m
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImage.h
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImage.m
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImagePlayer.h
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImagePlayer.m
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageRep.h
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageRep.m
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageView+WebCache.h
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageView+WebCache.m
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageView.h
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageView.m
+Pods/SDWebImage/SDWebImage/Core/SDCallbackQueue.h
+Pods/SDWebImage/SDWebImage/Core/SDCallbackQueue.m
+Pods/SDWebImage/SDWebImage/Core/SDDiskCache.h
+Pods/SDWebImage/SDWebImage/Core/SDDiskCache.m
+Pods/SDWebImage/SDWebImage/Core/SDGraphicsImageRenderer.h
+Pods/SDWebImage/SDWebImage/Core/SDGraphicsImageRenderer.m
+Pods/SDWebImage/SDWebImage/Core/SDImageAPNGCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageAPNGCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDImageAWebPCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageAWebPCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDImageCache.h
+Pods/SDWebImage/SDWebImage/Core/SDImageCache.m
+Pods/SDWebImage/SDWebImage/Core/SDImageCacheConfig.h
+Pods/SDWebImage/SDWebImage/Core/SDImageCacheConfig.m
+Pods/SDWebImage/SDWebImage/Core/SDImageCacheDefine.h
+Pods/SDWebImage/SDWebImage/Core/SDImageCacheDefine.m
+Pods/SDWebImage/SDWebImage/Core/SDImageCachesManager.h
+Pods/SDWebImage/SDWebImage/Core/SDImageCachesManager.m
+Pods/SDWebImage/SDWebImage/Core/SDImageCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDImageCoderHelper.h
+Pods/SDWebImage/SDWebImage/Core/SDImageCoderHelper.m
+Pods/SDWebImage/SDWebImage/Core/SDImageCodersManager.h
+Pods/SDWebImage/SDWebImage/Core/SDImageCodersManager.m
+Pods/SDWebImage/SDWebImage/Core/SDImageFrame.h
+Pods/SDWebImage/SDWebImage/Core/SDImageFrame.m
+Pods/SDWebImage/SDWebImage/Core/SDImageGIFCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageGIFCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDImageGraphics.h
+Pods/SDWebImage/SDWebImage/Core/SDImageGraphics.m
+Pods/SDWebImage/SDWebImage/Core/SDImageHEICCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageHEICCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDImageIOAnimatedCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageIOAnimatedCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDImageIOCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageIOCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDImageLoader.h
+Pods/SDWebImage/SDWebImage/Core/SDImageLoader.m
+Pods/SDWebImage/SDWebImage/Core/SDImageLoadersManager.h
+Pods/SDWebImage/SDWebImage/Core/SDImageLoadersManager.m
+Pods/SDWebImage/SDWebImage/Core/SDImageTransformer.h
+Pods/SDWebImage/SDWebImage/Core/SDImageTransformer.m
+Pods/SDWebImage/SDWebImage/Core/SDMemoryCache.h
+Pods/SDWebImage/SDWebImage/Core/SDMemoryCache.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheKeyFilter.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheKeyFilter.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheSerializer.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheSerializer.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageCompat.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageCompat.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDefine.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDefine.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloader.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloader.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderConfig.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderConfig.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderDecryptor.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderDecryptor.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderOperation.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderOperation.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderRequestModifier.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderRequestModifier.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderResponseModifier.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderResponseModifier.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageError.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageError.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageIndicator.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageIndicator.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageManager.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageManager.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageOperation.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageOperation.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageOptionsProcessor.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageOptionsProcessor.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImagePrefetcher.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImagePrefetcher.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageTransition.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageTransition.m
+Pods/SDWebImage/SDWebImage/Core/UIButton+WebCache.h
+Pods/SDWebImage/SDWebImage/Core/UIButton+WebCache.m
+Pods/SDWebImage/SDWebImage/Core/UIImage+ExtendedCacheData.h
+Pods/SDWebImage/SDWebImage/Core/UIImage+ExtendedCacheData.m
+Pods/SDWebImage/SDWebImage/Core/UIImage+ForceDecode.h
+Pods/SDWebImage/SDWebImage/Core/UIImage+ForceDecode.m
+Pods/SDWebImage/SDWebImage/Core/UIImage+GIF.h
+Pods/SDWebImage/SDWebImage/Core/UIImage+GIF.m
+Pods/SDWebImage/SDWebImage/Core/UIImage+MemoryCacheCost.h
+Pods/SDWebImage/SDWebImage/Core/UIImage+MemoryCacheCost.m
+Pods/SDWebImage/SDWebImage/Core/UIImage+Metadata.h
+Pods/SDWebImage/SDWebImage/Core/UIImage+Metadata.m
+Pods/SDWebImage/SDWebImage/Core/UIImage+MultiFormat.h
+Pods/SDWebImage/SDWebImage/Core/UIImage+MultiFormat.m
+Pods/SDWebImage/SDWebImage/Core/UIImage+Transform.h
+Pods/SDWebImage/SDWebImage/Core/UIImage+Transform.m
+Pods/SDWebImage/SDWebImage/Core/UIImageView+HighlightedWebCache.h
+Pods/SDWebImage/SDWebImage/Core/UIImageView+HighlightedWebCache.m
+Pods/SDWebImage/SDWebImage/Core/UIImageView+WebCache.h
+Pods/SDWebImage/SDWebImage/Core/UIImageView+WebCache.m
+Pods/SDWebImage/SDWebImage/Core/UIView+WebCache.h
+Pods/SDWebImage/SDWebImage/Core/UIView+WebCache.m
+Pods/SDWebImage/SDWebImage/Core/UIView+WebCacheOperation.h
+Pods/SDWebImage/SDWebImage/Core/UIView+WebCacheOperation.m
+Pods/SDWebImage/SDWebImage/Core/UIView+WebCacheState.h
+Pods/SDWebImage/SDWebImage/Core/UIView+WebCacheState.m
+Pods/SDWebImage/SDWebImage/Private/NSBezierPath+SDRoundedCorners.h
+Pods/SDWebImage/SDWebImage/Private/NSBezierPath+SDRoundedCorners.m
+Pods/SDWebImage/SDWebImage/Private/SDAssociatedObject.h
+Pods/SDWebImage/SDWebImage/Private/SDAssociatedObject.m
+Pods/SDWebImage/SDWebImage/Private/SDAsyncBlockOperation.h
+Pods/SDWebImage/SDWebImage/Private/SDAsyncBlockOperation.m
+Pods/SDWebImage/SDWebImage/Private/SDDeviceHelper.h
+Pods/SDWebImage/SDWebImage/Private/SDDeviceHelper.m
+Pods/SDWebImage/SDWebImage/Private/SDDisplayLink.h
+Pods/SDWebImage/SDWebImage/Private/SDDisplayLink.m
+Pods/SDWebImage/SDWebImage/Private/SDFileAttributeHelper.h
+Pods/SDWebImage/SDWebImage/Private/SDFileAttributeHelper.m
+Pods/SDWebImage/SDWebImage/Private/SDImageAssetManager.h
+Pods/SDWebImage/SDWebImage/Private/SDImageAssetManager.m
+Pods/SDWebImage/SDWebImage/Private/SDImageCachesManagerOperation.h
+Pods/SDWebImage/SDWebImage/Private/SDImageCachesManagerOperation.m
+Pods/SDWebImage/SDWebImage/Private/SDImageFramePool.h
+Pods/SDWebImage/SDWebImage/Private/SDImageFramePool.m
+Pods/SDWebImage/SDWebImage/Private/SDImageIOAnimatedCoderInternal.h
+Pods/SDWebImage/SDWebImage/Private/SDInternalMacros.h
+Pods/SDWebImage/SDWebImage/Private/SDInternalMacros.m
+Pods/SDWebImage/SDWebImage/Private/SDmetamacros.h
+Pods/SDWebImage/SDWebImage/Private/SDWeakProxy.h
+Pods/SDWebImage/SDWebImage/Private/SDWeakProxy.m
+Pods/SDWebImage/SDWebImage/Private/SDWebImageTransitionInternal.h
+Pods/SDWebImage/SDWebImage/Private/UIColor+SDHexString.h
+Pods/SDWebImage/SDWebImage/Private/UIColor+SDHexString.m
+Pods/SDWebImage/WebImage/PrivacyInfo.xcprivacy
+Pods/SDWebImage/WebImage/SDWebImage.h
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-acknowledgements.markdown
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-acknowledgements.plist
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-dummy.m
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-frameworks-Debug-input-files.xcfilelist
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-frameworks-Debug-output-files.xcfilelist
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-frameworks-Release-input-files.xcfilelist
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-frameworks-Release-output-files.xcfilelist
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-frameworks.sh
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-Info.plist
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp-umbrella.h
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp.debug.xcconfig
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp.modulemap
+Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp.release.xcconfig
+Pods/Target Support Files/SDWebImage/ResourceBundle-SDWebImage-SDWebImage-Info.plist
+Pods/Target Support Files/SDWebImage/SDWebImage-dummy.m
+Pods/Target Support Files/SDWebImage/SDWebImage-Info.plist
+Pods/Target Support Files/SDWebImage/SDWebImage-prefix.pch
+Pods/Target Support Files/SDWebImage/SDWebImage-umbrella.h
+Pods/Target Support Files/SDWebImage/SDWebImage.debug.xcconfig
+Pods/Target Support Files/SDWebImage/SDWebImage.modulemap
+Pods/Target Support Files/SDWebImage/SDWebImage.release.xcconfig
