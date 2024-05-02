@@ -30,6 +30,7 @@
 		C4621E412BE30BAC009F621C /* AudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E402BE30BAC009F621C /* AudioTrack.swift */; };
 		C4621E432BE30BB8009F621C /* ArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E422BE30BB8009F621C /* ArtistModel.swift */; };
 		C4621E452BE30BC5009F621C /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E442BE30BC5009F621C /* UserProfileModel.swift */; };
+		C4621E482BE30F1D009F621C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E472BE30F1D009F621C /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		C4621E402BE30BAC009F621C /* AudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrack.swift; sourceTree = "<group>"; };
 		C4621E422BE30BB8009F621C /* ArtistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistModel.swift; sourceTree = "<group>"; };
 		C4621E442BE30BC5009F621C /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		C4621E472BE30F1D009F621C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		C40264D62BE306E8001914ED /* MusicApp */ = {
 			isa = PBXGroup;
 			children = (
+				C4621E462BE30F0A009F621C /* Sources */,
 				C4621E192BE30955009F621C /* ExistingTools */,
 				C4621E1A2BE30966009F621C /* OtherScripts */,
 				C4621E1B2BE30973009F621C /* Directors */,
@@ -200,6 +203,14 @@
 				C4621E362BE30B1E009F621C /* TabBarViewController.swift */,
 			);
 			path = Basic;
+			sourceTree = "<group>";
+		};
+		C4621E462BE30F0A009F621C /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C4621E472BE30F1D009F621C /* Extension.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		CB2C9BB2B73F766F825B98F8 /* Pods */ = {
@@ -334,6 +345,7 @@
 				C4621E372BE30B1E009F621C /* TabBarViewController.swift in Sources */,
 				C4621E232BE30A35009F621C /* CallerApi.swift in Sources */,
 				C4621E412BE30BAC009F621C /* AudioTrack.swift in Sources */,
+				C4621E482BE30F1D009F621C /* Extension.swift in Sources */,
 				C4621E292BE30A7F009F621C /* AuthenticationViewController.swift in Sources */,
 				C40264D82BE306E8001914ED /* AppDelegate.swift in Sources */,
 				C4621E392BE30B30009F621C /* MainViewController.swift in Sources */,
@@ -490,6 +502,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4Q3P58HHV5;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -518,6 +531,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4Q3P58HHV5;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
