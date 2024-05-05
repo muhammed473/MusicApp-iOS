@@ -42,8 +42,19 @@ class WelcomeViewController: UIViewController {
     
     // MARK: - Assistants
     
-    private func logIn(succes: Bool){
+    private func logIn(success: Bool){
         // If successful, you will be logged in, otherwise an error message will be sent.
+        guard success else {
+            let alert = UIAlertController(title: "Error", message: "Could not log in", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            present(alert,animated: true)
+            return
+        }
+        let MainTabBarVc = TabBarViewController()
+        MainTabBarVc.modalPresentationStyle = .fullScreen
+        present(MainTabBarVc,animated: true)
+        
+        
     }
     
     // MARK: - Actions
@@ -53,7 +64,7 @@ class WelcomeViewController: UIViewController {
         let vc = AuthenticationViewController()
         vc.completion = { [weak self] success in
             DispatchQueue.main.async {
-                self?.logIn(succes: success)
+                self?.logIn(success: success)
             }
         }
         vc.navigationItem.largeTitleDisplayMode = .never

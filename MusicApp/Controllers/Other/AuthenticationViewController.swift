@@ -58,6 +58,13 @@ extension AuthenticationViewController : WKNavigationDelegate{
         let component = URLComponents(string: url.absoluteString)
         guard let code = component?.queryItems?.first(where: { $0.name == "code"})?.value else{return}
         print("PRİNT : Code:\(code)")
+        webView.isHidden = true
+        AuthDirector.shared.exhangeCodeForToken(code: code) { [weak self] success in
+            DispatchQueue.main.async {
+                self?.navigationController?.popToRootViewController(animated: true)
+                self?.completion?(success)
+            }
+        }
     }
     
 }
