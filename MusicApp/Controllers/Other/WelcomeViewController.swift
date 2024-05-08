@@ -43,7 +43,7 @@ class WelcomeViewController: UIViewController {
     // MARK: - Assistants
     
     private func logIn(success: Bool){
-        // If successful, you will be logged in, otherwise an error message will be sent.
+       
         guard success else {
             let alert = UIAlertController(title: "Error", message: "Could not log in", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))

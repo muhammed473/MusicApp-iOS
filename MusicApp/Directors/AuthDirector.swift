@@ -11,6 +11,7 @@ final class AuthDirector {
     
     static let shared = AuthDirector()
     private init() { }
+    private var refreshingToken = false
     
     struct Constants {
         static let clientId = "d056806013064ef18ec95ae4db0ca1a4"
@@ -40,14 +41,14 @@ final class AuthDirector {
         return UserDefaults.standard.string(forKey: "refresh_token")
     }
     
-    private var lastDateUsedToken: Date?{
+    private var lastDateUsedToken: Date?{ // 1 Hour
         return  UserDefaults.standard.object(forKey: "expirationDate") as? Date
     }
     
-    private var shouldRefreshToken: Bool{
+    private var isTokenRefreshRequired: Bool{
         guard let lastDateUsedToken = lastDateUsedToken else {return false}
         let currentDate = Date()
-        let sixMinutes : TimeInterval = 360
+        let sixMinutes : TimeInterval = 360 // 6 minutes
         return currentDate.addingTimeInterval(sixMinutes) >= lastDateUsedToken
     }
     
@@ -83,7 +84,7 @@ final class AuthDirector {
                 // let jsonData = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                 // print("PRİNT: SUCCES \(jsonData)")
                 let result = try JSONDecoder().decode(AuthResponseModel.self, from: data)
-                self?.cacheToken(result : result)
+                self?.saveCacheToken(result : result)
                 completion(true)
             }catch{
                 print(error.localizedDescription)
@@ -95,17 +96,41 @@ final class AuthDirector {
         
     }
     
+    private var allRefreshTokens = [((String)->Void)]()
+    
+    // MARK: - Valid Token
+    
+    public func validToken(completion: @escaping (String) ->Void) {
+        
+        guard !refreshingToken else {
+            // Append Completion..
+            allRefreshTokens.append(completion)
+            return
+        }
+        if isTokenRefreshRequired {
+            refreshIfNeeded { [weak self] succes in
+                if let token = self?.accessToken,succes{
+                    completion(token)
+                }
+            }
+        }else if let token = accessToken{
+            completion(token)
+        }
+    }
+    
     public func refreshIfNeeded(completion:@escaping (Bool) -> Void){
         
-        /* guard shouldRefreshToken else {
-         completion(false)
-         return
-         } */
+        guard !refreshingToken else {return}
+        guard isTokenRefreshRequired else {
+            completion(false)
+            return
+        }
         guard let refreshToken = self.refreshToken else {
             return
         }
         // Refresh Token..
         guard let url = URL(string:Constants.tokenApiUrl) else {return}
+        refreshingToken = true
         var components = URLComponents()
         components.queryItems = [
             URLQueryItem(name: "grant_type", value: "refresh_token"),
@@ -126,6 +151,7 @@ final class AuthDirector {
         request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+            self?.refreshingToken = false
             guard let data = data,error == nil else {
                 completion(false)
                 return
@@ -133,7 +159,9 @@ final class AuthDirector {
             do{
                 let result = try JSONDecoder().decode(AuthResponseModel.self, from: data)
                 print("PRİNT: Succesfully Refreshed")
-                self?.cacheToken(result : result)
+                self?.allRefreshTokens.forEach{ $0(result.access_token) }
+                self?.allRefreshTokens.removeAll()
+                self?.saveCacheToken(result : result)
                 completion(true)
             }catch{
                 print(error.localizedDescription)
@@ -143,7 +171,7 @@ final class AuthDirector {
         task.resume()
     }
     
-    private func cacheToken(result:AuthResponseModel){
+    private func saveCacheToken(result:AuthResponseModel){
         
         UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
         if let refresh_token = result.refresh_token {
