@@ -12,6 +12,7 @@
 		C40264DA2BE306E8001914ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40264D92BE306E8001914ED /* SceneDelegate.swift */; };
 		C40264E12BE306E9001914ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C40264E02BE306E9001914ED /* Assets.xcassets */; };
 		C40264E42BE306E9001914ED /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C40264E32BE306E9001914ED /* Base */; };
+		C4565B6B2BED79260032D66C /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4565B6A2BED79260032D66C /* SettingsModel.swift */; };
 		C4621E212BE30A2A009F621C /* AuthDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E202BE30A2A009F621C /* AuthDirector.swift */; };
 		C4621E232BE30A35009F621C /* CallerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E222BE30A35009F621C /* CallerApi.swift */; };
 		C4621E252BE30A44009F621C /* HapticsDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E242BE30A44009F621C /* HapticsDirector.swift */; };
@@ -44,6 +45,7 @@
 		C40264E02BE306E9001914ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C40264E32BE306E9001914ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C40264E52BE306E9001914ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4565B6A2BED79260032D66C /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		C4621E202BE30A2A009F621C /* AuthDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDirector.swift; sourceTree = "<group>"; };
 		C4621E222BE30A35009F621C /* CallerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallerApi.swift; sourceTree = "<group>"; };
 		C4621E242BE30A44009F621C /* HapticsDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsDirector.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				C4621E422BE30BB8009F621C /* ArtistModel.swift */,
 				C4621E442BE30BC5009F621C /* UserProfileModel.swift */,
 				C4A328B02BE65313002173AB /* AuthResponseModel.swift */,
+				C4565B6A2BED79260032D66C /* SettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				C4621E482BE30F1D009F621C /* Extension.swift in Sources */,
 				C4621E292BE30A7F009F621C /* AuthenticationViewController.swift in Sources */,
 				C40264D82BE306E8001914ED /* AppDelegate.swift in Sources */,
+				C4565B6B2BED79260032D66C /* SettingsModel.swift in Sources */,
 				C4621E392BE30B30009F621C /* MainViewController.swift in Sources */,
 				C4621E3B2BE30B40009F621C /* SearchViewController.swift in Sources */,
 				C40264DA2BE306E8001914ED /* SceneDelegate.swift in Sources */,

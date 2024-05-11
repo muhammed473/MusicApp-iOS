@@ -28,8 +28,8 @@ class MainViewController: UIViewController {
     
     @objc func touchSettings(){
         
-        let vc = ProfileViewController()
-        vc.title = "PROFİLE"
+        let vc = SettingsViewController()
+        vc.title = "SETTİNGS"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
         

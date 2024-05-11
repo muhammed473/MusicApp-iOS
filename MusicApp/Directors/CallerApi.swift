@@ -42,9 +42,12 @@ final class CallerApi {
                     return
                 }
                 do{
-                    let result =  try JSONSerialization.jsonObject(with: data,options: .allowFragments)
-                    print(result)
+                   // let userProfileModelValues = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                     let userProfileModelValues = try JSONDecoder().decode(UserProfileModel.self, from: data)
+                    print("PRİNT: Result : \(userProfileModelValues)")
+                   completion(.success(userProfileModelValues))
                 }catch{
+                    print(error.localizedDescription)
                     completion(.failure(error))
                 }
                 
