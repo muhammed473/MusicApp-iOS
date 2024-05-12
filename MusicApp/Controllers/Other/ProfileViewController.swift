@@ -62,7 +62,23 @@ class ProfileViewController: UIViewController {
         userProfileModelValues.append("User id : \(userProfileModel.id)")
         userProfileModelValues.append("Country: \(userProfileModel.country)")
         userProfileModelValues.append("Product : \(userProfileModel.product)")
+        configureTableHeaderPhoto(string: userProfileModel.images.first?.url)
         tableView.reloadData()
+    }
+    
+    private func configureTableHeaderPhoto(string:String?){
+        
+        guard let urlString = string, let url = URL(string: urlString) else { return }
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.height/1.5))
+        let imageSize : CGFloat = headerView.height / 2
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
+        headerView.addSubview(imageView)
+        imageView.center = headerView.center
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = imageSize / 1.8
+        imageView.sd_setImage(with: url,completed: nil)
+        tableView.tableHeaderView = headerView
     }
      
     private func failedGetProfile(){

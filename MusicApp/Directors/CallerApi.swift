@@ -42,10 +42,10 @@ final class CallerApi {
                     return
                 }
                 do{
-                   // let userProfileModelValues = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
-                     let userProfileModelValues = try JSONDecoder().decode(UserProfileModel.self, from: data)
-                    print("PRİNT: Result : \(userProfileModelValues)")
-                   completion(.success(userProfileModelValues))
+                    // let userProfileModelValues = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                    // print("PRİNT: Result : \(userProfileModelValues)")
+                    let userProfileModelValues = try JSONDecoder().decode(UserProfileModel.self, from: data)
+                    completion(.success(userProfileModelValues))
                 }catch{
                     print(error.localizedDescription)
                     completion(.failure(error))
@@ -55,6 +55,30 @@ final class CallerApi {
             task.resume()
         }
     }
+   
+    public func getNewReleasesPlaylists(completion: @escaping((Result<NewReleasesResponseModel,Error>)) -> Void ) {
+        
+        createRequest(url: URL(string:Constants.baseApiUrl + "/browse/new-releases?limit=50"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else{
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                   /* let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                    print("PRİNT: Result : \(json)") */
+                    let result = try JSONDecoder().decode(NewReleasesResponseModel.self, from: data)
+                    completion(.success(result))
+                }catch{
+                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+        
+    }
+    
     
     public func createRequest(url: URL?,type: HttpMethod, completion: @escaping (URLRequest) -> Void) {
        
@@ -68,5 +92,7 @@ final class CallerApi {
     
         }
     }
+    
+   
     
 }

@@ -19,10 +19,33 @@ class MainViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(touchSettings))
+        
+        fetchNewReleasesPlayList()
     }
     
     // MARK: - Assistants
     
+    func fetchNewReleasesPlayList(){
+        
+        CallerApi.shared.getNewReleasesPlaylists { result in
+            switch result {
+            case .success(let newRelease): break
+            case.failure(let error): break
+            }
+            
+        }
+    }
+    
+    func fetchNewReleasesAlbum(){
+        
+        CallerApi.shared.getNewReleasesPlaylists { result in
+            switch result {
+            case .success(let newRelease): break
+            case.failure(let error): break
+            }
+            
+        }
+    }
     
     // MARK: - Actions
     
