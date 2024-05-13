@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(touchSettings))
         
         fetchNewReleasesPlayList()
+        fetchFeaturedPlayList()
     }
     
     // MARK: - Assistants
@@ -36,9 +37,9 @@ class MainViewController: UIViewController {
         }
     }
     
-    func fetchNewReleasesAlbum(){
+    func fetchFeaturedPlayList(){
         
-        CallerApi.shared.getNewReleasesPlaylists { result in
+        CallerApi.shared.getFeaturedPlaylists { result in
             switch result {
             case .success(let newRelease): break
             case.failure(let error): break

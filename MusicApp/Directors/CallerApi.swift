@@ -56,7 +56,7 @@ final class CallerApi {
         }
     }
    
-    public func getNewReleasesPlaylists(completion: @escaping((Result<NewReleasesResponseModel,Error>)) -> Void ) {
+    public func getNewReleasesPlaylists(completion: @escaping((Result<NewReleasesModel,Error>)) -> Void ) {
         
         createRequest(url: URL(string:Constants.baseApiUrl + "/browse/new-releases?limit=50"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
@@ -65,9 +65,9 @@ final class CallerApi {
                     return
                 }
                 do{
-                   /* let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                  /*  let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
                     print("PRİNT: Result : \(json)") */
-                    let result = try JSONDecoder().decode(NewReleasesResponseModel.self, from: data)
+                    let result = try JSONDecoder().decode(NewReleasesModel.self, from: data)
                     completion(.success(result))
                 }catch{
                     print(error.localizedDescription)
@@ -79,6 +79,29 @@ final class CallerApi {
         
     }
     
+    public func getFeaturedPlaylists(completion : @escaping((Result<FeaturedPlayListModel,Error>)) -> Void){
+            
+            createRequest(url: URL(string: Constants.baseApiUrl + "/browse/featured-playlists?limit=2"), type: .GET) { request in
+                let task = URLSession.shared.dataTask(with: request) { data, _ , error in
+                    guard let data = data, error == nil else {
+                        completion(.failure(ApiError.failedGetData))
+                        return
+                    }
+                    do{
+                        /* let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                        print("PRİNT : \(json)") */
+                        let result = try JSONDecoder().decode(FeaturedPlayListModel.self, from: data)
+                        completion(.success(result))
+                    }
+                    catch{
+                        print(error.localizedDescription)
+                        completion(.failure(error))
+                    }
+                }
+                task.resume()
+            }
+            
+        }
     
     public func createRequest(url: URL?,type: HttpMethod, completion: @escaping (URLRequest) -> Void) {
        
@@ -96,3 +119,5 @@ final class CallerApi {
    
     
 }
+
+

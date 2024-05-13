@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NewReleasesResponseModel : Codable {
+struct NewReleasesModel : Codable {
     let albums : AlbumsResponse
 }
 
