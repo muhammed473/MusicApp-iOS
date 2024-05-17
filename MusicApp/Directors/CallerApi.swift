@@ -103,6 +103,54 @@ final class CallerApi {
             
         }
     
+    public func getRecommendations(genres : Set<String>, completion : @escaping((Result<RecommendationsGenresModel,Error>)) -> Void){
+        let seeds = genres.joined(separator: ",")
+        createRequest(url: URL(string: Constants.baseApiUrl + "/recommendations?seed_genres=\(seeds)"),type: .GET) { request in
+            print(request.url?.absoluteString)
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                    print("PRİNT : \(json)")
+                    
+                }catch{
+                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+        
+    }
+    
+    public func getRecommendationsGenres(completion : @escaping((Result<RecommendationsGenresModel,Error>)) -> Void) {
+        
+        createRequest(url: URL(string: Constants.baseApiUrl + "/recommendations/available-genre-seeds"), type: .GET){ request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                
+                guard let data = data, error == nil else {
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                    /* let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    print("PRİNT: \(json)") */
+                    let result = try JSONDecoder().decode(RecommendationsGenresModel.self, from: data)
+                    completion(.success(result))
+                }catch{
+                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+                
+            }
+            task.resume()
+        }
+        
+    }
+    
     public func createRequest(url: URL?,type: HttpMethod, completion: @escaping (URLRequest) -> Void) {
        
         AuthDirector.shared.validToken { token in

@@ -22,6 +22,8 @@ class MainViewController: UIViewController {
         
         fetchNewReleasesPlayList()
         fetchFeaturedPlayList()
+       // fetchRecommendations()
+        fetchRecommendationsGenres()
     }
     
     // MARK: - Assistants
@@ -42,9 +44,45 @@ class MainViewController: UIViewController {
         CallerApi.shared.getFeaturedPlaylists { result in
             switch result {
             case .success(let newRelease): break
+                3
             case.failure(let error): break
             }
+
+        }
+    }
+    
+   /* func fetchRecommendations(){
+        
+        CallerApi.shared.getRecommendations(genres: Set<String>){ result in
+            switch result {
+            case .success(let recommendations): break
+                
+            case .failure(let error): break
+            }
+        }
+        
+    } */
+    
+    func fetchRecommendationsGenres(){
+      
+        CallerApi.shared.getRecommendationsGenres { result in
+            switch result {
+            case .success(let recommendationsGenres):
+                let genres = recommendationsGenres.genres
+                var seeds = Set<String>()
+                while seeds.count < 4 {
+                    if let random = genres.randomElement(){
+                        seeds.insert(random)
+                    }
+                }
+                CallerApi.shared.getRecommendations(genres: seeds) { _ in
+                    
+                }
             
+            case .failure(_): break
+                
+                
+            }
         }
     }
     
