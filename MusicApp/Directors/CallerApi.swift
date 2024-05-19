@@ -103,18 +103,20 @@ final class CallerApi {
             
         }
     
-    public func getRecommendations(genres : Set<String>, completion : @escaping((Result<RecommendationsGenresModel,Error>)) -> Void){
+    public func getRecommendations(genres : Set<String>, completion : @escaping((Result<RecommendationsModel,Error>)) -> Void){
         let seeds = genres.joined(separator: ",")
-        createRequest(url: URL(string: Constants.baseApiUrl + "/recommendations?seed_genres=\(seeds)"),type: .GET) { request in
-            print(request.url?.absoluteString)
+        createRequest(url: URL(string: Constants.baseApiUrl + "/recommendations?limit=42&seed_genres=\(seeds)"),type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
                     completion(.failure(ApiError.failedGetData))
                     return
                 }
                 do{
-                    let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
-                    print("PRİNT : \(json)")
+                    /* let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                    print("PRİNT : Recommendations =  \(json)") */
+                    let result = try JSONDecoder().decode(RecommendationsModel.self, from: data)
+                    //print("PRİNT: \(result) ")
+                    completion(.success(result))
                     
                 }catch{
                     print(error.localizedDescription)
@@ -144,7 +146,6 @@ final class CallerApi {
                     print(error.localizedDescription)
                     completion(.failure(error))
                 }
-                
             }
             task.resume()
         }

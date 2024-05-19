@@ -14,6 +14,9 @@
 		C40264E42BE306E9001914ED /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C40264E32BE306E9001914ED /* Base */; };
 		C40C44612BF0F7E900CB6526 /* NewReleasesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40C44602BF0F7E900CB6526 /* NewReleasesModel.swift */; };
 		C40C44632BF110B400CB6526 /* ApiImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40C44622BF110B400CB6526 /* ApiImageModel.swift */; };
+		C4160B162BF8FF2200EB9B88 /* RecommendationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4160B152BF8FF2200EB9B88 /* RecommendationsModel.swift */; };
+		C428094E2BFA0A48002077BD /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428094D2BFA0A48002077BD /* TrackModel.swift */; };
+		C42809502BFA0E32002077BD /* PlayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428094F2BFA0E32002077BD /* PlayListModel.swift */; };
 		C4565B6B2BED79260032D66C /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4565B6A2BED79260032D66C /* SettingsModel.swift */; };
 		C4621E212BE30A2A009F621C /* AuthDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E202BE30A2A009F621C /* AuthDirector.swift */; };
 		C4621E232BE30A35009F621C /* CallerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E222BE30A35009F621C /* CallerApi.swift */; };
@@ -50,6 +53,9 @@
 		C40264E52BE306E9001914ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C40C44602BF0F7E900CB6526 /* NewReleasesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesModel.swift; sourceTree = "<group>"; };
 		C40C44622BF110B400CB6526 /* ApiImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiImageModel.swift; sourceTree = "<group>"; };
+		C4160B152BF8FF2200EB9B88 /* RecommendationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsModel.swift; sourceTree = "<group>"; };
+		C428094D2BFA0A48002077BD /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
+		C428094F2BFA0E32002077BD /* PlayListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModel.swift; sourceTree = "<group>"; };
 		C4565B6A2BED79260032D66C /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		C4621E202BE30A2A009F621C /* AuthDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDirector.swift; sourceTree = "<group>"; };
 		C4621E222BE30A35009F621C /* CallerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallerApi.swift; sourceTree = "<group>"; };
@@ -232,6 +238,7 @@
 			children = (
 				C46FCE672BF2A1550088CB27 /* OwnerModel.swift */,
 				C46FCE652BF298290088CB27 /* FeaturedPlayListModel.swift */,
+				C428094F2BFA0E32002077BD /* PlayListModel.swift */,
 			);
 			path = AllFeaturedPlayListModels;
 			sourceTree = "<group>";
@@ -240,6 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				C47B54F72BF3F68A0048ADD6 /* RecommendationsGenresModel.swift */,
+				C4160B152BF8FF2200EB9B88 /* RecommendationsModel.swift */,
+				C428094D2BFA0A48002077BD /* TrackModel.swift */,
 			);
 			path = AllRecommendationsModels;
 			sourceTree = "<group>";
@@ -376,8 +385,10 @@
 				C4621E232BE30A35009F621C /* CallerApi.swift in Sources */,
 				C4621E482BE30F1D009F621C /* Extension.swift in Sources */,
 				C4621E292BE30A7F009F621C /* AuthenticationViewController.swift in Sources */,
+				C428094E2BFA0A48002077BD /* TrackModel.swift in Sources */,
 				C40264D82BE306E8001914ED /* AppDelegate.swift in Sources */,
 				C40C44632BF110B400CB6526 /* ApiImageModel.swift in Sources */,
+				C4160B162BF8FF2200EB9B88 /* RecommendationsModel.swift in Sources */,
 				C4565B6B2BED79260032D66C /* SettingsModel.swift in Sources */,
 				C4621E392BE30B30009F621C /* MainViewController.swift in Sources */,
 				C46FCE662BF298290088CB27 /* FeaturedPlayListModel.swift in Sources */,
@@ -387,6 +398,7 @@
 				C4621E452BE30BC5009F621C /* UserProfileModel.swift in Sources */,
 				C4621E332BE30AD5009F621C /* PlaylistViewController.swift in Sources */,
 				C4621E212BE30A2A009F621C /* AuthDirector.swift in Sources */,
+				C42809502BFA0E32002077BD /* PlayListModel.swift in Sources */,
 				C4621E312BE30AC0009F621C /* PlayerViewController.swift in Sources */,
 				C4621E2D2BE30A9B009F621C /* SettingsViewController.swift in Sources */,
 				C4A328B12BE65313002173AB /* AuthResponseModel.swift in Sources */,
