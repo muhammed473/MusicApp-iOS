@@ -115,7 +115,7 @@ final class CallerApi {
                     /* let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
                     print("PRİNT : Recommendations =  \(json)") */
                     let result = try JSONDecoder().decode(RecommendationsModel.self, from: data)
-                    //print("PRİNT: \(result) ")
+                   // print("PRİNT: \(result) ")
                     completion(.success(result))
                     
                 }catch{
