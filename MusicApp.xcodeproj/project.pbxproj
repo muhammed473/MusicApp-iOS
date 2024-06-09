@@ -41,6 +41,7 @@
 		C4A249802C147CD700B6017B /* NewReleasesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A2497F2C147CD700B6017B /* NewReleasesCollectionViewCell.swift */; };
 		C4A249822C147D3500B6017B /* FeaturedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A249812C147D3500B6017B /* FeaturedCollectionViewCell.swift */; };
 		C4A249842C147D4700B6017B /* RecommendationsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A249832C147D4700B6017B /* RecommendationsCollectionViewCell.swift */; };
+		C4A249862C149F8300B6017B /* NewReleasesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A249852C149F8300B6017B /* NewReleasesCellViewModel.swift */; };
 		C4A328B12BE65313002173AB /* AuthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A328B02BE65313002173AB /* AuthResponseModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		C4A2497F2C147CD700B6017B /* NewReleasesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesCollectionViewCell.swift; sourceTree = "<group>"; };
 		C4A249812C147D3500B6017B /* FeaturedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionViewCell.swift; sourceTree = "<group>"; };
 		C4A249832C147D4700B6017B /* RecommendationsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCollectionViewCell.swift; sourceTree = "<group>"; };
+		C4A249852C149F8300B6017B /* NewReleasesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesCellViewModel.swift; sourceTree = "<group>"; };
 		C4A328B02BE65313002173AB /* AuthResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +182,7 @@
 		C4621E1D2BE30998009F621C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				C4A249852C149F8300B6017B /* NewReleasesCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4A249862C149F8300B6017B /* NewReleasesCellViewModel.swift in Sources */,
 				C4621E252BE30A44009F621C /* HapticsDirector.swift in Sources */,
 				C4621E352BE30AE9009F621C /* SearchResultsViewController.swift in Sources */,
 				C4621E2B2BE30A8F009F621C /* WelcomeViewController.swift in Sources */,
