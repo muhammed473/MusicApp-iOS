@@ -9,9 +9,9 @@ import UIKit
 
 enum ChooseSectionType{
     
-    case newReleasesPlayList(viewModels: [NewReleasesCellViewModel] )      // 1
-    case featuredPlayList(viewModels: [NewReleasesCellViewModel] )         // 2
-    case recommendationsPlayList(viewModels: [NewReleasesCellViewModel] )  // 3
+    case newReleasesPlayList(viewModels: [NewReleasesCellViewModel] )           // 1
+    case featuredPlayList(viewModels: [FeaturedPlaylistCellViewModel] )         // 2
+    case recommendationsPlayList(viewModels: [RecommendedTrackCellViewModel] )  // 3
 }
 
 class MainViewController: UIViewController {
@@ -183,8 +183,16 @@ class MainViewController: UIViewController {
                                             numberOfTracks: $0.total_tracks,
                                             artistName: $0.artists.first?.name ?? "--")
         })))
-        sections.append(.featuredPlayList(viewModels: [] ))
-        sections.append(.recommendationsPlayList(viewModels: [] ))
+        sections.append(.featuredPlayList(viewModels: playLists.compactMap({
+            return FeaturedPlaylistCellViewModel(name: $0.name,
+                                                 featuredImageURL: URL(string: $0.images.first?.url ?? ""),
+                                                 creatorName: $0.owner.display_name)
+        }) ))
+        sections.append(.recommendationsPlayList(viewModels: tracks.compactMap({
+            return RecommendedTrackCellViewModel(name: $0.name,
+                                                 artistName: $0.artists.first?.name ?? "--",
+                                                 artworkURL: URL(string: $0.album.images.first?.url ?? "" ))
+        }) ))
         collectionView.reloadData()
     }
     
@@ -242,13 +250,17 @@ extension MainViewController : UICollectionViewDelegate,UICollectionViewDataSour
                                                                 for: indexPath) as? FeaturedCollectionViewCell
             else { return UICollectionViewCell() }
             cell.backgroundColor = .green
+            let viewModel = viewModels[indexPath.row]
+            cell.configureFeatured(viewModel: viewModel)
             return cell
             
         case .recommendationsPlayList(let viewModels):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.identifier,
                                                                 for: indexPath) as? RecommendationsCollectionViewCell
             else { return UICollectionViewCell() }
-            cell.backgroundColor = .red
+            //cell.backgroundColor = .red
+            let viewModel = viewModels[indexPath.row]
+            cell.configureRecommendation(viewModel: viewModel)
             return cell
         }
         

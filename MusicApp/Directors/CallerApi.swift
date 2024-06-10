@@ -81,7 +81,7 @@ final class CallerApi {
     
     public func getFeaturedPlaylists(completion : @escaping((Result<FeaturedPlayListModel,Error>)) -> Void){
             
-            createRequest(url: URL(string: Constants.baseApiUrl + "/browse/featured-playlists?limit=2"), type: .GET) { request in
+            createRequest(url: URL(string: Constants.baseApiUrl + "/browse/featured-playlists?limit=15"), type: .GET) { request in
                 let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                     guard let data = data, error == nil else {
                         completion(.failure(ApiError.failedGetData))

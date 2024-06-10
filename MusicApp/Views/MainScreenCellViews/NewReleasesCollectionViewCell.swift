@@ -13,7 +13,7 @@ class NewReleasesCollectionViewCell : UICollectionViewCell{
     static let identifier = "NewReleasesCollectionViewCell"
     private let albumNameLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22,weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 20,weight: .semibold)
         label.numberOfLines = 0
         return label
     }()
@@ -26,7 +26,7 @@ class NewReleasesCollectionViewCell : UICollectionViewCell{
     private let artistNameLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 20,weight: .light)
+        label.font = UIFont.systemFont(ofSize: 19,weight: .light)
         return label
     }()
     private let albumImageView : UIImageView = {

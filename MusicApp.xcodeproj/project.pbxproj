@@ -17,6 +17,8 @@
 		C4160B162BF8FF2200EB9B88 /* RecommendationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4160B152BF8FF2200EB9B88 /* RecommendationsModel.swift */; };
 		C428094E2BFA0A48002077BD /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428094D2BFA0A48002077BD /* TrackModel.swift */; };
 		C42809502BFA0E32002077BD /* PlayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428094F2BFA0E32002077BD /* PlayListModel.swift */; };
+		C44225B32C16288100BD7A8D /* FeaturedPlaylistCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44225B22C16288100BD7A8D /* FeaturedPlaylistCellViewModel.swift */; };
+		C44225B52C16353800BD7A8D /* RecommendedTrackCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44225B42C16353800BD7A8D /* RecommendedTrackCellViewModel.swift */; };
 		C4565B6B2BED79260032D66C /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4565B6A2BED79260032D66C /* SettingsModel.swift */; };
 		C4621E212BE30A2A009F621C /* AuthDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E202BE30A2A009F621C /* AuthDirector.swift */; };
 		C4621E232BE30A35009F621C /* CallerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4621E222BE30A35009F621C /* CallerApi.swift */; };
@@ -60,6 +62,8 @@
 		C4160B152BF8FF2200EB9B88 /* RecommendationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsModel.swift; sourceTree = "<group>"; };
 		C428094D2BFA0A48002077BD /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
 		C428094F2BFA0E32002077BD /* PlayListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModel.swift; sourceTree = "<group>"; };
+		C44225B22C16288100BD7A8D /* FeaturedPlaylistCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistCellViewModel.swift; sourceTree = "<group>"; };
+		C44225B42C16353800BD7A8D /* RecommendedTrackCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTrackCellViewModel.swift; sourceTree = "<group>"; };
 		C4565B6A2BED79260032D66C /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		C4621E202BE30A2A009F621C /* AuthDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDirector.swift; sourceTree = "<group>"; };
 		C4621E222BE30A35009F621C /* CallerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallerApi.swift; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				C4A249852C149F8300B6017B /* NewReleasesCellViewModel.swift */,
+				C44225B22C16288100BD7A8D /* FeaturedPlaylistCellViewModel.swift */,
+				C44225B42C16353800BD7A8D /* RecommendedTrackCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -400,6 +406,8 @@
 				C4621E252BE30A44009F621C /* HapticsDirector.swift in Sources */,
 				C4621E352BE30AE9009F621C /* SearchResultsViewController.swift in Sources */,
 				C4621E2B2BE30A8F009F621C /* WelcomeViewController.swift in Sources */,
+				C44225B52C16353800BD7A8D /* RecommendedTrackCellViewModel.swift in Sources */,
+				C44225B32C16288100BD7A8D /* FeaturedPlaylistCellViewModel.swift in Sources */,
 				C4621E2F2BE30AAD009F621C /* ProfileViewController.swift in Sources */,
 				C4621E3D2BE30B50009F621C /* LibraryViewController.swift in Sources */,
 				C4621E372BE30B1E009F621C /* TabBarViewController.swift in Sources */,
