@@ -30,6 +30,9 @@ class MainViewController: UIViewController {
         return spinner
     }()
     private var sections = [ChooseSectionType]()
+    private var newAlbums : [Album] = []
+    private var playLists : [PlayListModel] = []
+    private var tracks : [TracksModel] = []
     
     
     // MARK: - Lifecycle
@@ -37,6 +40,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fetchData()
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(touchSettings))
         
@@ -47,7 +51,7 @@ class MainViewController: UIViewController {
        // fetchFeaturedPlayList()
        // fetchRecommendations()
        // fetchRecommendationsGenres()
-        fetchData()
+       
         
     }
     
@@ -86,7 +90,7 @@ class MainViewController: UIViewController {
         CallerApi.shared.getFeaturedPlaylists { result in
             switch result {
             case .success(let newRelease): break
-                3
+                
             case.failure(let error): break
             }
 
@@ -99,9 +103,10 @@ class MainViewController: UIViewController {
         group.enter()
         group.enter()
         group.enter()
+       
         
         var newReleasesModelValues : NewReleasesModel?
-        var featuredModelValues : FeaturedPlayListModel?
+        var featuredModelValues : FeaturedPlayListsModel?
         var recommendationModelValues : RecommendationsModel?
         
         // MARK: - NewReleases
@@ -132,7 +137,7 @@ class MainViewController: UIViewController {
         }
         // MARK: - Recommendation
         
-        CallerApi.shared.getRecommendationsGenres { result in
+        CallerApi.shared.getRecommendationsGenres {  result in
             switch result {
             case .success(let recommendationsGenres):
                 let genres = recommendationsGenres.genres
@@ -174,9 +179,11 @@ class MainViewController: UIViewController {
     }
     
     private func configureModels(newAlbums:[Album], playLists: [PlayListModel],tracks: [TracksModel]){
-        print("PRİNT: New Album is count : \(newAlbums.count)")
-        print("PRİNT: \(playLists.count)")
-        print("PRİNT: \(tracks.count)")
+    
+        self.newAlbums = newAlbums
+        self.playLists = playLists
+        self.tracks  = tracks
+        
         sections.append(.newReleasesPlayList(viewModels: newAlbums.compactMap({
             return NewReleasesCellViewModel(name: $0.name,
                                             albumImageUrl: URL(string: $0.images.first?.url ?? ""),
@@ -191,7 +198,7 @@ class MainViewController: UIViewController {
         sections.append(.recommendationsPlayList(viewModels: tracks.compactMap({
             return RecommendedTrackCellViewModel(name: $0.name,
                                                  artistName: $0.artists.first?.name ?? "--",
-                                                 artworkURL: URL(string: $0.album.images.first?.url ?? "" ))
+                                                 artworkURL:  URL(string: $0.album?.images.first?.url ?? "" ))
         }) ))
         collectionView.reloadData()
     }
@@ -238,7 +245,8 @@ extension MainViewController : UICollectionViewDelegate,UICollectionViewDataSour
         switch currentSection {
             
         case .newReleasesPlayList( let viewModels):
-            guard  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewReleasesCollectionViewCell.identifier, for: indexPath) as? NewReleasesCollectionViewCell
+            guard  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewReleasesCollectionViewCell.identifier, 
+                                                                 for: indexPath) as? NewReleasesCollectionViewCell
             else { return UICollectionViewCell() }
            // cell.backgroundColor = .blue
             let viewModel = viewModels[indexPath.row]
@@ -266,6 +274,32 @@ extension MainViewController : UICollectionViewDelegate,UICollectionViewDataSour
         
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let section = sections[indexPath.section]
+        switch section{
+        case .newReleasesPlayList :
+            let album = newAlbums[indexPath.row]
+            let vc = AlbumDetailViewController(album: album)
+            vc.title = album.name
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .featuredPlayList:
+            let playList = playLists[indexPath.row]
+            let vc = PlayListDetailViewController(playList: playList)
+            vc.title = playList.name
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+        
+        case .recommendationsPlayList:
+            break
+        }
+        
+        
+    }
 }
 
 // MARK: - CreateSectionLayout

@@ -31,7 +31,7 @@ final class CallerApi {
     static let shared = CallerApi()
     private init() {}
     
-    // MARK: - Assistants
+    // MARK: - Profile Call
     
     public func getUserProfile(completion: @escaping(Result<UserProfileModel,Error>) -> Void){
         
@@ -56,6 +56,8 @@ final class CallerApi {
         }
     }
    
+    // MARK: - Main For Api Calls
+    
     public func getNewReleasesPlaylists(completion: @escaping((Result<NewReleasesModel,Error>)) -> Void ) {
         
         createRequest(url: URL(string:Constants.baseApiUrl + "/browse/new-releases?limit=50"), type: .GET) { request in
@@ -79,9 +81,9 @@ final class CallerApi {
         
     }
     
-    public func getFeaturedPlaylists(completion : @escaping((Result<FeaturedPlayListModel,Error>)) -> Void){
+    public func getFeaturedPlaylists(completion : @escaping((Result<FeaturedPlayListsModel,Error>)) -> Void){
             
-            createRequest(url: URL(string: Constants.baseApiUrl + "/browse/featured-playlists?limit=15"), type: .GET) { request in
+            createRequest(url: URL(string: Constants.baseApiUrl + "/browse/featured-playlists?limit=12"), type: .GET) { request in
                 let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                     guard let data = data, error == nil else {
                         completion(.failure(ApiError.failedGetData))
@@ -90,7 +92,7 @@ final class CallerApi {
                     do{
                         /* let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
                         print("PRİNT : \(json)") */
-                        let result = try JSONDecoder().decode(FeaturedPlayListModel.self, from: data)
+                        let result = try JSONDecoder().decode(FeaturedPlayListsModel.self, from: data)
                         completion(.success(result))
                     }
                     catch{
@@ -152,6 +154,61 @@ final class CallerApi {
         
     }
     
+    
+    // MARK: - New Releases Album Detail
+    
+    public func getAlbumDetails(album:Album,completion: @escaping (Result<AlbumDetailModel,Error>) -> Void ){
+        
+        createRequest(url: URL(string: Constants.baseApiUrl + "/albums/" + album.id), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                    /*let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                    print("PRİNT: Album Detail infos : \(json)") */
+                    let result = try JSONDecoder().decode(AlbumDetailModel.self,from: data)
+                  //  print("PRİNT : Album Detail Result :\(result)")
+                    completion(.success(result))
+                }catch{
+                    print(error)
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    // MARK: - Featured PlayList Detail
+    
+    public func getFeaturedPlayListDetails(playList:PlayListModel,completion: @escaping (Result<PlayListDetail,Error>) -> Void ){
+        
+        createRequest(url: URL(string: Constants.baseApiUrl + "/playlists/" + playList.id), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                    /*let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                    print("PRİNT: PlayList Detail infos : \(json)") */
+                   let result  = try JSONDecoder().decode(PlayListDetail.self, from: data)
+                  //  print("PRİNT: Results of placing playlists in the detail model : \(result)")
+                    completion(.success(result))
+                    
+                }catch{
+                    print(error)
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    
+    // MARK: - Request & Token
+    
     public func createRequest(url: URL?,type: HttpMethod, completion: @escaping (URLRequest) -> Void) {
        
         AuthDirector.shared.validToken { token in
@@ -164,8 +221,6 @@ final class CallerApi {
     
         }
     }
-    
-   
     
 }
 

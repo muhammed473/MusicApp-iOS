@@ -7,13 +7,16 @@
 
 import Foundation
 
-struct FeaturedPlayListModel : Codable {
+
+
+struct FeaturedPlayListsModel : Codable {
     let playlists : PlayListResponse
 }
 
 struct PlayListResponse : Codable{
     let items : [PlayListModel]
 }
+
 
 
 
