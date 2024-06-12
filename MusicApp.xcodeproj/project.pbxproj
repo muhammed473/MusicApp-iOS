@@ -48,6 +48,8 @@
 		C4A328B12BE65313002173AB /* AuthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A328B02BE65313002173AB /* AuthResponseModel.swift */; };
 		C4A69C0D2C176D2D00FBDEF1 /* AlbumDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A69C0C2C176D2D00FBDEF1 /* AlbumDetailModel.swift */; };
 		C4AADD312C18805800E41167 /* PlayListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AADD302C18805800E41167 /* PlayListDetailViewController.swift */; };
+		C4C962252C1971560070C4C2 /* PlayListHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C962242C1971560070C4C2 /* PlayListHeaderCollectionReusableView.swift */; };
+		C4C962272C19B4B40070C4C2 /* PlayListDetailHeaderForViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C962262C19B4B40070C4C2 /* PlayListDetailHeaderForViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		C4A328B02BE65313002173AB /* AuthResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseModel.swift; sourceTree = "<group>"; };
 		C4A69C0C2C176D2D00FBDEF1 /* AlbumDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModel.swift; sourceTree = "<group>"; };
 		C4AADD302C18805800E41167 /* PlayListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailViewController.swift; sourceTree = "<group>"; };
+		C4C962242C1971560070C4C2 /* PlayListHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		C4C962262C19B4B40070C4C2 /* PlayListDetailHeaderForViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailHeaderForViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +199,7 @@
 				C4A249852C149F8300B6017B /* NewReleasesCellViewModel.swift */,
 				C44225B22C16288100BD7A8D /* FeaturedPlaylistCellViewModel.swift */,
 				C44225B42C16353800BD7A8D /* RecommendedTrackCellViewModel.swift */,
+				C4C962262C19B4B40070C4C2 /* PlayListDetailHeaderForViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				C4A2497E2C147B8900B6017B /* MainScreenCellViews */,
+				C4C962242C1971560070C4C2 /* PlayListHeaderCollectionReusableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -438,12 +444,14 @@
 				C4160B162BF8FF2200EB9B88 /* RecommendationsModel.swift in Sources */,
 				C4565B6B2BED79260032D66C /* SettingsModel.swift in Sources */,
 				C4621E392BE30B30009F621C /* MainViewController.swift in Sources */,
+				C4C962252C1971560070C4C2 /* PlayListHeaderCollectionReusableView.swift in Sources */,
 				C46FCE662BF298290088CB27 /* FeaturedPlayListModel.swift in Sources */,
 				C4621E3B2BE30B40009F621C /* SearchViewController.swift in Sources */,
 				C4A249842C147D4700B6017B /* RecommendationsCollectionViewCell.swift in Sources */,
 				C40264DA2BE306E8001914ED /* SceneDelegate.swift in Sources */,
 				C46FCE682BF2A1550088CB27 /* OwnerModel.swift in Sources */,
 				C4621E452BE30BC5009F621C /* UserProfileModel.swift in Sources */,
+				C4C962272C19B4B40070C4C2 /* PlayListDetailHeaderForViewModel.swift in Sources */,
 				C4A249802C147CD700B6017B /* NewReleasesCollectionViewCell.swift in Sources */,
 				C4621E212BE30A2A009F621C /* AuthDirector.swift in Sources */,
 				C42809502BFA0E32002077BD /* PlayListModel.swift in Sources */,

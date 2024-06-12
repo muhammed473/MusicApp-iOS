@@ -10,13 +10,13 @@ import UIKit
 class RecommendationsCollectionViewCell : UICollectionViewCell{
     
     static let identifier = "RecommendationsCollectionViewCell"
-    private let recommendationImage : UIImageView = {
+     let recommendationImage : UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.image = UIImage(systemName: "photo")
         return imageView
     }()
-    private let trackNameLabel : UILabel = {
+     let trackNameLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20,weight: .semibold)
         label.numberOfLines = 0
@@ -51,8 +51,8 @@ class RecommendationsCollectionViewCell : UICollectionViewCell{
                                       width: contentView.width - recommendationImage.right - 15, height: (contentView.height)/2)
         artistNameLabel.frame = CGRect(x: recommendationImage.right + 9, y: contentView.height/2,
                                        width: contentView.width - recommendationImage.right - 15, height: contentView.height/2)
-      
-       
+        
+        
     }
     
     override func prepareForReuse() {
