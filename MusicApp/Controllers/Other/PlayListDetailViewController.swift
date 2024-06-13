@@ -16,7 +16,7 @@ class PlayListDetailViewController: UIViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(1.0) ) )
         item.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 2, bottom: 1, trailing: 2)
-      
+        
         let verticalGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60)),
             subitem: item,
@@ -25,9 +25,9 @@ class PlayListDetailViewController: UIViewController {
         let section = NSCollectionLayoutSection(group: verticalGroup)
         section.boundarySupplementaryItems = [
             NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                                                           heightDimension: .fractionalHeight(1.0)),
-                                                    elementKind: UICollectionView.elementKindSectionHeader,
-                                                    alignment: .top)
+                                                                                           heightDimension: .fractionalHeight(0.8)),
+                                                        elementKind: UICollectionView.elementKindSectionHeader,
+                                                        alignment: .top)
         ]
         return section
     }))
@@ -92,18 +92,18 @@ class PlayListDetailViewController: UIViewController {
     
     // MARK: - Actions
     
-   @objc func touchShareButton(){
+    @objc func touchShareButton(){
         
-       print("PRİNT : external_urls : \(playList.external_urls)")
-       guard let externalUrls = URL(string: playList.external_urls["spotify"] ?? "") else {return}
-       let vc = UIActivityViewController(
-        activityItems: [externalUrls],
-        applicationActivities: []
-       )
-       vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-       present(vc, animated: true, completion: nil)
+        print("PRİNT : external_urls : \(playList.external_urls)")
+        guard let externalUrls = URL(string: playList.external_urls["spotify"] ?? "") else {return}
+        let vc = UIActivityViewController(
+            activityItems: [externalUrls],
+            applicationActivities: []
+        )
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true, completion: nil)
     }
-
+    
 }
 
 // MARK: - UICollectionViewDelegate,UICollectionViewDataSource
@@ -120,10 +120,10 @@ extension PlayListDetailViewController : UICollectionViewDelegate,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.identifier, for: indexPath) as? RecommendationsCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.identifier, for: indexPath) as? RecommendationsCollectionViewCell
         else  { return UICollectionViewCell() }
         cell.configureRecommendation(viewModel: viewModels[indexPath.row])
-       // cell.backgroundColor = .blue
+        // cell.backgroundColor = .blue
         return cell
     }
     
