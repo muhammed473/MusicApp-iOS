@@ -8,16 +8,10 @@
 import Foundation
 
 
-
-struct FeaturedPlayListsModel : Codable {
+struct AllFeaturedPlayLists : Codable {
     let playlists : PlayListResponse
 }
 
 struct PlayListResponse : Codable{
-    let items : [PlayListModel]
+    let items : [PlayListModels]
 }
-
-
-
-
-

@@ -11,7 +11,7 @@ class PlayListDetailViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var playList : PlayListModel
+    private var playList : PlayListModels
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { _, _  -> NSCollectionLayoutSection in
         
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(1.0) ) )
@@ -35,7 +35,7 @@ class PlayListDetailViewController: UIViewController {
     
     // MARK: - Lifecycle
     
-    init(playList:PlayListModel){
+    init(playList : PlayListModels){
         self.playList  = playList
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,7 +73,7 @@ class PlayListDetailViewController: UIViewController {
     // MARK: - Assistants
     
     func fetchPlayListDetails() {
-        CallerApi.shared.getFeaturedPlayListDetails(playList: playList) { [weak self] result in
+        CallerApi.shared.getFeaturedPlayListDetails(playLists: playList) { [weak self] result in
             DispatchQueue.main.async {
                 switch result{
                 case .success(let model):

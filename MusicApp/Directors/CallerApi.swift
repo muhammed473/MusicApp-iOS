@@ -81,9 +81,9 @@ final class CallerApi {
         
     }
     
-    public func getFeaturedPlaylists(completion : @escaping((Result<FeaturedPlayListsModel,Error>)) -> Void){
+    public func getFeaturedPlaylists(completion : @escaping((Result<AllFeaturedPlayLists,Error>)) -> Void){
             
-            createRequest(url: URL(string: Constants.baseApiUrl + "/browse/featured-playlists?limit=12"), type: .GET) { request in
+            createRequest(url: URL(string: Constants.baseApiUrl + "/browse/featured-playlists?limit=6"), type: .GET) { request in
                 let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                     guard let data = data, error == nil else {
                         completion(.failure(ApiError.failedGetData))
@@ -92,7 +92,7 @@ final class CallerApi {
                     do{
                         /* let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
                         print("PRİNT : \(json)") */
-                        let result = try JSONDecoder().decode(FeaturedPlayListsModel.self, from: data)
+                        let result = try JSONDecoder().decode(AllFeaturedPlayLists.self, from: data)
                         completion(.success(result))
                     }
                     catch{
@@ -182,9 +182,9 @@ final class CallerApi {
     
     // MARK: - Featured PlayList Detail
     
-    public func getFeaturedPlayListDetails(playList:PlayListModel,completion: @escaping (Result<PlayListDetail,Error>) -> Void ){
+    public func getFeaturedPlayListDetails(playLists : PlayListModels,completion: @escaping (Result<PlayListDetail,Error>) -> Void ){
         
-        createRequest(url: URL(string: Constants.baseApiUrl + "/playlists/" + playList.id), type: .GET) { request in
+        createRequest(url: URL(string: Constants.baseApiUrl + "/playlists/" + playLists.id), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
                     completion(.failure(ApiError.failedGetData))
@@ -206,6 +206,58 @@ final class CallerApi {
         }
     }
     
+    // MARK: - Categories
+    
+    public func getCategories(completion : @escaping(Result<[CategoryModel],Error>) -> Void){
+        
+        createRequest(url: URL(string: Constants.baseApiUrl + "/browse/categories?limit=20"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else{
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                    /*let json =  try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                    print("PRİNT: CATEGORİ : \(json)")*/
+                    
+                    let result = try JSONDecoder().decode(CategoryTopModel.self, from: data)
+                  //  print("Modeled version of the categories we get from the API : \(result.categories.items)")
+                    completion(.success(result.categories.items))
+                }
+                catch{
+                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    public func getCategoryPlayList(categoryModel:CategoryModel, completion : @escaping(Result<[PlayListModels],Error>) -> Void){
+        
+        /*createRequest(url: URL(string: Constants.baseApiUrl + "/browse/categories/\(categoryModel.id)/playlists?limit=2"), type: .GET) { request in */
+        createRequest(url: URL(string: Constants.baseApiUrl + "/browse/categories/" + categoryModel.id! + "/playlists?limit=50"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                    /*let json = try JSONSerialization.jsonObject(with: data,options: .allowFragments)
+                    print("PRİNT: PLAYLİST OF THE CLİCKED CATEGORY : \(json)") */
+                    let result = try JSONDecoder().decode(AllFeaturedPlayLists.self,from: data)
+                    let playlists = result.playlists.items
+                   // print(result)
+                    completion(.success(playlists))
+                }catch{
+                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
     
     // MARK: - Request & Token
     
@@ -218,7 +270,6 @@ final class CallerApi {
             request.httpMethod = type.rawValue
             request.timeoutInterval = 30
             completion(request)
-    
         }
     }
     

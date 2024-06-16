@@ -42,8 +42,11 @@ class MainViewController: UIViewController {
     }()
     private var sections = [ChooseSectionType]()
     private var newAlbums : [Album] = []
-    private var playLists : [PlayListModel] = []
+    private var playLists : [PlayListModels] = []
     private var tracks : [TracksModel] = []
+    var newReleasesModelValues : NewReleasesModel?
+    var featuredModelValues : AllFeaturedPlayLists?
+    var recommendationModelValues : RecommendationsModel?
     
     
     // MARK: - Lifecycle
@@ -57,13 +60,7 @@ class MainViewController: UIViewController {
         
         configureCollectionView()
         view.addSubview(spinner)
-        
-       // fetchNewReleasesPlayList()
-       // fetchFeaturedPlayList()
-       // fetchRecommendations()
-       // fetchRecommendationsGenres()
-       
-        
+      
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,28 +83,6 @@ class MainViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
     }
     
-    func fetchNewReleasesPlayList(){
-        
-        CallerApi.shared.getNewReleasesPlaylists { result in
-            switch result {
-            case .success(let newRelease): break
-            case.failure(let error): break
-            }
-            
-        }
-    }
-    
-    func fetchFeaturedPlayList(){
-        
-        CallerApi.shared.getFeaturedPlaylists { result in
-            switch result {
-            case .success(let newRelease): break
-                
-            case.failure(let error): break
-            }
-
-        }
-    }
  
     func fetchData(){
       
@@ -117,19 +92,15 @@ class MainViewController: UIViewController {
         group.enter()
        
         
-        var newReleasesModelValues : NewReleasesModel?
-        var featuredModelValues : FeaturedPlayListsModel?
-        var recommendationModelValues : RecommendationsModel?
-        
         // MARK: - NewReleases
         
-        CallerApi.shared.getNewReleasesPlaylists { result in
+        CallerApi.shared.getNewReleasesPlaylists {  result in
             defer {
                 group.leave()
             }
             switch result {
             case .success(let modelValues):
-                newReleasesModelValues = modelValues
+                self.newReleasesModelValues = modelValues
             case.failure(let error):
                 print(error.localizedDescription)
             }
@@ -142,14 +113,14 @@ class MainViewController: UIViewController {
             }
             switch result {
             case .success(let modelValues):
-                featuredModelValues = modelValues
+                self.featuredModelValues = modelValues
             case.failure(let error):
                 print(error.localizedDescription)
             }
         }
         // MARK: - Recommendation
         
-        CallerApi.shared.getRecommendationsGenres {  result in
+        CallerApi.shared.getRecommendationsGenres { result in
             switch result {
             case .success(let recommendationsGenres):
                 let genres = recommendationsGenres.genres
@@ -165,7 +136,7 @@ class MainViewController: UIViewController {
                     }
                     switch recommendationResult {
                     case .success(let modelValues):
-                        recommendationModelValues = modelValues
+                        self.recommendationModelValues = modelValues
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -177,9 +148,9 @@ class MainViewController: UIViewController {
         }
         
         group.notify(queue: DispatchQueue.main) {
-            guard let newAlbums = newReleasesModelValues?.albums.items,
-                  let playLists = featuredModelValues?.playlists.items,
-                  let tracks = recommendationModelValues?.tracks
+            guard let newAlbums = self.newReleasesModelValues?.albums.items,
+                  let playLists = self.featuredModelValues?.playlists.items,
+                  let tracks = self.recommendationModelValues?.tracks
             else {
                 fatalError("PRİNT: FATAL ERROR Because : Models are nil")
                 return
@@ -190,7 +161,7 @@ class MainViewController: UIViewController {
         
     }
     
-    private func configureModels(newAlbums:[Album], playLists: [PlayListModel],tracks: [TracksModel]){
+    private func configureModels(newAlbums:[Album], playLists: [PlayListModels],tracks: [TracksModel]){
     
         self.newAlbums = newAlbums
         self.playLists = playLists

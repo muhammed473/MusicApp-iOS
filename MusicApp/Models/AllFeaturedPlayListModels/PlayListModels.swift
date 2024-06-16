@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PlayListModel :Codable{
+struct PlayListModels :Codable{
     
     let description : String
     let external_urls : [String:String]
