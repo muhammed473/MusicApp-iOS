@@ -42,8 +42,9 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
+        
         view.addSubview(collectionView)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifer)
         collectionView.backgroundColor = .systemBackground
@@ -77,21 +78,32 @@ class SearchViewController: UIViewController {
     
 }
 
-// MARK: - UISearchResultsUpdating
+// MARK: - UISearchBarDelegate
 
-extension SearchViewController : UISearchResultsUpdating {
+extension SearchViewController : UISearchBarDelegate{
     
-    func updateSearchResults(for searchController: UISearchController) {
-        
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let resultsController = searchController.searchResultsController as? SearchResultsViewController,
-              let queryText =  searchController.searchBar.text, !queryText.trimmingCharacters(in: .whitespaces).isEmpty
+              let queryText =  searchBar.text, !queryText.trimmingCharacters(in: .whitespaces).isEmpty
         else {return}
         
+        resultsController.delegate = self
+        
+        CallerApi.shared.searchResult(query: queryText) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let values):
+                    resultsController.configureData(searchResultModels: values)
+                    break
+                case .failure(let error):
+                    break
+                }
+            }
+        }
         print(queryText)
     }
-    
-    
 }
+
 
 // MARK: - UICollectionViewDelegate,UICollectionViewDataSource
 
@@ -124,6 +136,31 @@ extension SearchViewController : UICollectionViewDelegate,UICollectionViewDataSo
         let vc = CategoryForPlayListController(categoryModel: categoryModel)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+}
+
+// MARK: - SearchResultsViewControllerDelegate
+
+extension SearchViewController : SearchResultsViewControllerDelegate{
+    
+    func touchResult(result: SearchResultModel) {
+        switch result{
+            
+        case .album(model: let model):
+            let vc = AlbumDetailViewController(album: model)
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+        case .artist(model: let model):
+            break
+        case .playlist(model: let model):
+            let vc = PlayListDetailViewController(playList : model )
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+        case .track(model: let model):
+            break
+        }
+    }
+    
     
 }
 

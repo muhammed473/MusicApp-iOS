@@ -235,7 +235,8 @@ final class CallerApi {
     
     public func getCategoryPlayList(categoryModel:CategoryModel, completion : @escaping(Result<[PlayListModels],Error>) -> Void){
         
-        /*createRequest(url: URL(string: Constants.baseApiUrl + "/browse/categories/\(categoryModel.id)/playlists?limit=2"), type: .GET) { request in */
+     //   createRequest(url: URL(string: Constants.baseApiUrl + "/browse/categories/\(categoryModel.id!)/playlists?limit=2"), type: .GET) { request in
+        
         createRequest(url: URL(string: Constants.baseApiUrl + "/browse/categories/" + categoryModel.id! + "/playlists?limit=50"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
@@ -250,6 +251,41 @@ final class CallerApi {
                    // print(result)
                     completion(.success(playlists))
                 }catch{
+                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    
+    // MARK: - Search
+    
+    public func searchResult(query:String,completion: @escaping(Result<[SearchResultModel],Error>) ->Void){
+        
+        createRequest(url: URL(string: Constants.baseApiUrl + "/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&type=album,artist,playlist,track&limit=10"),
+                      type: .GET) { request in
+          
+         //   print("PRİNT: REQUEST : \(request.url?.absoluteString ?? "None")")
+            let task = URLSession.shared.dataTask(with: request) { data,_, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                     /*let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                      print("PRİNT: SEARCH RESULT : \(json)") */
+                    
+                    let result  = try JSONDecoder().decode(SearchResponseModel.self, from: data)
+                    var searchResultsModel : [SearchResultModel] = []
+                    searchResultsModel.append(contentsOf: result.albums.items.compactMap({SearchResultModel.album(model: $0)}))
+                    searchResultsModel.append(contentsOf: result.artists.items.compactMap({SearchResultModel.artist(model: $0)}))
+                    searchResultsModel.append(contentsOf: result.playlists.items.compactMap({SearchResultModel.playlist(model:$0)}))
+                    searchResultsModel.append(contentsOf: result.tracks.items.compactMap({SearchResultModel.track(model: $0)}))
+                    completion(.success(searchResultsModel))
+                }
+                catch{
                     print(error.localizedDescription)
                     completion(.failure(error))
                 }

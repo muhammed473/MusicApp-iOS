@@ -15,6 +15,6 @@ struct PlayListModels :Codable{
     let images : [ApiImageModel]
     let name : String
     let owner : OwnerModel
-    let primary_color : String
+    let primary_color : String?
     let snapshot_id : String
 }
