@@ -11,6 +11,7 @@ struct ArtistModel : Codable {
     
     let id : String
     let name : String
+    let images : [ApiImageModel]?
     let type : String
     let external_urls : [String:String]
 }

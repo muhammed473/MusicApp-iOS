@@ -18,7 +18,8 @@ class SearchResultsViewController: UIViewController {
     private var searchSections : [SearchSection] = []
     private let tableView : UITableView = {
         let tableView = UITableView(frame: .zero,style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(DefaultTableViewCell.self,forCellReuseIdentifier: DefaultTableViewCell.identifer)
+        tableView.register(SubTitleTableViewCell.self, forCellReuseIdentifier: SubTitleTableViewCell.identifer)
         tableView.isHidden = true
         return tableView
     }()
@@ -101,20 +102,56 @@ extension SearchResultsViewController : UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let result = searchSections[indexPath.section].searchResultModels[indexPath.row]
         switch result{
             
-        case .album(model: let model):
-            cell.textLabel?.text =  model.name
-        case .artist(model: let model):
-            cell.textLabel?.text = model.name
-        case .playlist(model: let model):
-            cell.textLabel?.text =  model.name
-        case .track(model: let model):
-            cell.textLabel?.text = model.name
+        case .album(let model):
+            
+            guard let albumCell = tableView.dequeueReusableCell(withIdentifier: SubTitleTableViewCell.identifer,
+                                                                for: indexPath) as? SubTitleTableViewCell
+            else {
+                return UITableViewCell()
+            }
+            let viewModel = SubTitleTableViewModel(title: model.name,imageUrl: URL(string: model.images.first?.url ?? ""),
+                                                   subTitle: model.artists.first?.name ?? "")
+            albumCell.configure(viewModel: viewModel)
+            return albumCell
+        case .artist(let model):
+            
+            guard let artistCell = tableView.dequeueReusableCell(withIdentifier: DefaultTableViewCell.identifer,
+                                                                for: indexPath) as? DefaultTableViewCell
+            else {
+                return UITableViewCell()
+            }
+            let viewModel = DefaultTableViewModel(title: model.name,imageUrl: URL(string: model.images?.first?.url ?? ""))
+            artistCell.configure(viewModel: viewModel)
+        return artistCell
+            
+        case .playlist(let model):
+            guard let albumCell = tableView.dequeueReusableCell(withIdentifier: SubTitleTableViewCell.identifer,
+                                                                for: indexPath) as? SubTitleTableViewCell
+            else {
+                return UITableViewCell()
+            }
+            let viewModel = SubTitleTableViewModel(title: model.name,imageUrl: URL(string: model.images.first?.url ?? ""),
+                                                   subTitle: model.owner.display_name)
+            albumCell.configure(viewModel: viewModel)
+            return albumCell
+            
+        case .track(let model):
+            guard let trackCell = tableView.dequeueReusableCell(withIdentifier: SubTitleTableViewCell.identifer,
+                                                                for: indexPath) as? SubTitleTableViewCell
+            else {
+                return UITableViewCell()
+            }
+            let viewModel = SubTitleTableViewModel(title: model.name,
+                                                   imageUrl: URL(string: model.album?.images.first?.url ?? ""),
+                                                   subTitle: model.artists.first?.name ?? "")
+            trackCell.configure(viewModel: viewModel)
+            return trackCell
         }
-        return cell
+        
+      
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
