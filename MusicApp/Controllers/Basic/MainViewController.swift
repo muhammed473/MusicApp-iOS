@@ -291,7 +291,8 @@ extension MainViewController : UICollectionViewDelegate,UICollectionViewDataSour
             navigationController?.pushViewController(vc, animated: true)
         
         case .recommendationsPlayList:
-            break
+            let track = tracks[indexPath.row]
+            PlaybackPresenter.startPlayback(viewController: self, trackModel: track)
         }
         
         

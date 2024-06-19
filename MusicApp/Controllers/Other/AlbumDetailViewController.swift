@@ -31,6 +31,7 @@ class AlbumDetailViewController: UIViewController {
         return section
     }))
     private var viewModels = [AlbumDetailViewModel]()
+    private var tracks = [TracksModel]()
     
     // MARK: - Lifecycle
     
@@ -73,6 +74,7 @@ class AlbumDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result{
                 case .success(let model):
+                    self?.tracks = model.tracks.items
                     self?.viewModels = model.tracks.items.compactMap({
                         AlbumDetailViewModel(name: $0.name,
                                              artistName: $0.artists.first?.name ?? "--" )})
@@ -131,6 +133,9 @@ class AlbumDetailViewController: UIViewController {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             collectionView.deselectItem(at: indexPath, animated: true)
             // Song Play
+            
+            let track = tracks[indexPath.row]
+            PlaybackPresenter.startPlayback(viewController: self, trackModel: track)
         }
         
         
@@ -142,7 +147,7 @@ class AlbumDetailViewController: UIViewController {
         
         func playListDetailHeaderProtocol(headerView: PlayListHeaderCollectionReusableView) {
             
-            print("PRİNT: Playing all..")
+            PlaybackPresenter.startPlayback(viewController: self, tracks: tracks)
         }
         
         

@@ -32,6 +32,7 @@ class PlayListDetailViewController: UIViewController {
         return section
     }))
     private var viewModels = [RecommendedTrackCellViewModel]()
+    private var tracks = [TracksModel]()
     
     // MARK: - Lifecycle
     
@@ -77,6 +78,7 @@ class PlayListDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result{
                 case .success(let model):
+                    self?.tracks = model.tracks.items.compactMap({$0.track})
                     self?.viewModels = model.tracks.items.compactMap({
                         RecommendedTrackCellViewModel(name: $0.track.name,
                                                       artistName: $0.track.artists.first?.name ?? "--",
@@ -150,11 +152,10 @@ extension PlayListDetailViewController : UICollectionViewDelegate,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        // Song Play
+        
+        let track = tracks[indexPath.row]
+        PlaybackPresenter.startPlayback(viewController: self, trackModel: track)
     }
-    
-    
-    
     
 }
 
@@ -165,6 +166,7 @@ extension PlayListDetailViewController : PlayListHeaderCollectionReusableViewDel
     func playListDetailHeaderProtocol(headerView: PlayListHeaderCollectionReusableView) {
         
         print("PRİNT: Playing all..")
+        PlaybackPresenter.startPlayback(viewController: self, tracks: tracks)
     }
     
     
