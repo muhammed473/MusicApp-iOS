@@ -135,7 +135,7 @@ class AlbumDetailViewController: UIViewController {
             // Song Play
             
             let track = tracks[indexPath.row]
-            PlaybackPresenter.startPlayback(viewController: self, trackModel: track)
+            PlaybackPresenter.shared.startPlayback(viewController: self, trackModel: track)
         }
         
         
@@ -147,7 +147,7 @@ class AlbumDetailViewController: UIViewController {
         
         func playListDetailHeaderProtocol(headerView: PlayListHeaderCollectionReusableView) {
             
-            PlaybackPresenter.startPlayback(viewController: self, tracks: tracks)
+            PlaybackPresenter.shared.startPlayback(viewController: self, tracks: tracks)
         }
         
         

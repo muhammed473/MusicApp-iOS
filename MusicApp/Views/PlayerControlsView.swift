@@ -12,6 +12,7 @@ protocol PlayerControlsViewDelegate : AnyObject{
     func touchPlayPauseButtonProtocol(playerControlsView : PlayerControlsView)
     func touchForwardButtonProtocol(playerControlsView : PlayerControlsView)
     func touchBackButtonProtocol(playerControlsView : PlayerControlsView)
+    func touchVolumeSliderProtocol(playerControlsView : PlayerControlsView, slideResultValue : Float)
 }
 
 final class PlayerControlsView : UIView{
@@ -19,6 +20,7 @@ final class PlayerControlsView : UIView{
     // MARK: - Properties
     
     weak var delegate : PlayerControlsViewDelegate?
+    private var isPlaying : Bool = true
     private let volumeSlider : UISlider = {
         let slider = UISlider()
         slider.value = 0.5
@@ -74,6 +76,7 @@ final class PlayerControlsView : UIView{
         forwardButton.addTarget(self, action: #selector(touchForwardButton), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(touchBackButton), for: .touchUpInside)
         playPauseButton.addTarget(self, action: #selector(touchPlayPauseButton), for: .touchUpInside)
+        volumeSlider.addTarget(self, action: #selector(touchVolumeSlider), for: .valueChanged)
     }
     
     required init?(coder: NSCoder) {
@@ -90,10 +93,16 @@ final class PlayerControlsView : UIView{
         volumeSlider.frame = CGRect(x: 10, y: subTitleLabel.bottom+20, width: width-20, height: 44)
         let buttonSize : CGFloat = 55
         playPauseButton.frame = CGRect(x: (width-buttonSize)/2, y: volumeSlider.bottom+30, width: buttonSize, height: buttonSize)
-        backButton.frame = CGRect(x: playPauseButton.left-75, y: playPauseButton.top, width: buttonSize, height: buttonSize)
-        forwardButton.frame = CGRect(x: playPauseButton.left+75, y: playPauseButton.top, width: buttonSize, height: buttonSize)
+        backButton.frame = CGRect(x: playPauseButton.left-110, y: playPauseButton.top, width: buttonSize, height: buttonSize)
+        forwardButton.frame = CGRect(x: playPauseButton.left+110, y: playPauseButton.top, width: buttonSize, height: buttonSize)
+    }
+    
+    // MARK: - Assistants
+    
+    func configure(viewModel : PlayerControlsViewModel){
         
-        
+        nameLabel.text = viewModel.title
+        subTitleLabel.text = viewModel.subTitle
     }
     
     // MARK: - Actions
@@ -107,7 +116,19 @@ final class PlayerControlsView : UIView{
     }
     
     @objc private func touchPlayPauseButton(){
+        
+        self.isPlaying = !isPlaying
         delegate?.touchPlayPauseButtonProtocol(playerControlsView: self)
+        // Update Image..
+       let pauseImage = UIImage(systemName: "pause",withConfiguration: UIImage.SymbolConfiguration(pointSize: 33,weight: .regular))
+       let playImage = UIImage(systemName: "play.fill",withConfiguration: UIImage.SymbolConfiguration(pointSize: 33,weight: .regular))
+        playPauseButton.setImage(isPlaying ? pauseImage : playImage, for: .normal)
+    }
+    
+    @objc private func touchVolumeSlider(slider : UISlider){
+        
+        let value = slider.value
+        delegate?.touchVolumeSliderProtocol(playerControlsView: self, slideResultValue: value)
     }
     
 }

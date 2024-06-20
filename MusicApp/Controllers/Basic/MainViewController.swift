@@ -292,7 +292,7 @@ extension MainViewController : UICollectionViewDelegate,UICollectionViewDataSour
         
         case .recommendationsPlayList:
             let track = tracks[indexPath.row]
-            PlaybackPresenter.startPlayback(viewController: self, trackModel: track)
+            PlaybackPresenter.shared.startPlayback(viewController: self, trackModel: track)
         }
         
         

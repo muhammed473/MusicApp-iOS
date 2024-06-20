@@ -7,15 +7,24 @@
 
 import UIKit
 
+protocol PlayerViewControllerDelegate : AnyObject{
+    
+    func touchPlayPause()
+    func touchForward()
+    func touchBack()
+    func touchSlider(resultValue:Float)
+}
+
 class PlayerViewController: UIViewController {
    
-
     // MARK: - Properties
     
-   private let photoImageView : UIImageView = {
-       let imageView = UIImageView()
+    weak var playerDataSourceProtocol : PlayerDataSourceProtocol?
+    weak var delegate : PlayerViewControllerDelegate?
+    private let photoImageView : UIImageView = {
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .red
+      //  imageView.backgroundColor = .red
         return imageView
         
     }()
@@ -25,12 +34,13 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         playerControlsView.delegate = self
         view.addSubview(photoImageView)
         view.addSubview(playerControlsView)
         configureBarButtons()
+        configure()
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,6 +60,12 @@ class PlayerViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(touchActionButton))
     }
     
+    private func configure(){
+        photoImageView.sd_setImage(with: playerDataSourceProtocol?.imageUrl,completed: nil)
+        playerControlsView.configure(viewModel: PlayerControlsViewModel(title: playerDataSourceProtocol?.songName,
+                                                                        subTitle: playerDataSourceProtocol?.subTitle))
+    }
+    
     // MARK: - Actions
     
     @objc func touchCloseButton(){
@@ -66,18 +82,20 @@ class PlayerViewController: UIViewController {
 // MARK: - PlayerControlsViewDelegate
 
 extension PlayerViewController : PlayerControlsViewDelegate{
-    
+  
     func touchPlayPauseButtonProtocol(playerControlsView: PlayerControlsView) {
-        
+        delegate?.touchPlayPause()
     }
     
     func touchForwardButtonProtocol(playerControlsView: PlayerControlsView) {
-        
+        delegate?.touchForward()
     }
     
     func touchBackButtonProtocol(playerControlsView: PlayerControlsView) {
-        
+        delegate?.touchBack()
     }
     
-    
+    func touchVolumeSliderProtocol(playerControlsView: PlayerControlsView, slideResultValue: Float) {
+        delegate?.touchSlider(resultValue: slideResultValue)
+    }
 }
