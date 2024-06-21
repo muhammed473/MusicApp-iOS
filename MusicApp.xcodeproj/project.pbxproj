@@ -60,6 +60,9 @@
 		C4C962252C1971560070C4C2 /* PlayListHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C962242C1971560070C4C2 /* PlayListHeaderCollectionReusableView.swift */; };
 		C4C962272C19B4B40070C4C2 /* PlayListDetailHeaderForViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C962262C19B4B40070C4C2 /* PlayListDetailHeaderForViewModel.swift */; };
 		C4D2E8F22C2417C300C8A907 /* PlayerControlsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D2E8F12C2417C300C8A907 /* PlayerControlsViewModel.swift */; };
+		C4D5CBA72C25ACE600037894 /* LibraryPlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5CBA62C25ACE600037894 /* LibraryPlayListViewController.swift */; };
+		C4D5CBA92C25AD7600037894 /* LibraryAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5CBA82C25AD7600037894 /* LibraryAlbumsViewController.swift */; };
+		C4D5CBAB2C25C7FF00037894 /* LibraryToogleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5CBAA2C25C7FF00037894 /* LibraryToogleView.swift */; };
 		C4E89B9E2C21C4D300B05B8B /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E89B9D2C21C4D300B05B8B /* DefaultTableViewCell.swift */; };
 		C4E89BA02C21D34100B05B8B /* DefaultTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E89B9F2C21D34100B05B8B /* DefaultTableViewModel.swift */; };
 		C4E89BA22C222E4200B05B8B /* SubTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E89BA12C222E4200B05B8B /* SubTitleTableViewCell.swift */; };
@@ -127,6 +130,9 @@
 		C4C962242C1971560070C4C2 /* PlayListHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		C4C962262C19B4B40070C4C2 /* PlayListDetailHeaderForViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailHeaderForViewModel.swift; sourceTree = "<group>"; };
 		C4D2E8F12C2417C300C8A907 /* PlayerControlsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsViewModel.swift; sourceTree = "<group>"; };
+		C4D5CBA62C25ACE600037894 /* LibraryPlayListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPlayListViewController.swift; sourceTree = "<group>"; };
+		C4D5CBA82C25AD7600037894 /* LibraryAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAlbumsViewController.swift; sourceTree = "<group>"; };
+		C4D5CBAA2C25C7FF00037894 /* LibraryToogleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryToogleView.swift; sourceTree = "<group>"; };
 		C4E89B9D2C21C4D300B05B8B /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
 		C4E89B9F2C21D34100B05B8B /* DefaultTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewModel.swift; sourceTree = "<group>"; };
 		C4E89BA12C222E4200B05B8B /* SubTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -269,6 +275,7 @@
 				C4054A9C2C1B1255008D355F /* AlbumTrackForCollectionViewCell.swift */,
 				C45757FB2C1C49F000C9161D /* CategoryCollectionViewCell.swift */,
 				C435E6462C232FE50048B29C /* PlayerControlsView.swift */,
+				C4D5CBAA2C25C7FF00037894 /* LibraryToogleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +302,7 @@
 		C4621E262BE30A54009F621C /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				C4D5CBA52C25AC8E00037894 /* LibraryChild */,
 				C4621E282BE30A7F009F621C /* AuthenticationViewController.swift */,
 				C4621E2A2BE30A8F009F621C /* WelcomeViewController.swift */,
 				C4621E2C2BE30A9B009F621C /* SettingsViewController.swift */,
@@ -365,6 +373,15 @@
 				C4A69C0C2C176D2D00FBDEF1 /* AlbumDetailModel.swift */,
 			);
 			path = AllNewReleasesModels;
+			sourceTree = "<group>";
+		};
+		C4D5CBA52C25AC8E00037894 /* LibraryChild */ = {
+			isa = PBXGroup;
+			children = (
+				C4D5CBA62C25ACE600037894 /* LibraryPlayListViewController.swift */,
+				C4D5CBA82C25AD7600037894 /* LibraryAlbumsViewController.swift */,
+			);
+			path = LibraryChild;
 			sourceTree = "<group>";
 		};
 		C4E89B9A2C21C44E00B05B8B /* AllSearchResultCellViews */ = {
@@ -514,6 +531,7 @@
 				C4621E252BE30A44009F621C /* HapticsDirector.swift in Sources */,
 				C4621E352BE30AE9009F621C /* SearchResultsViewController.swift in Sources */,
 				C4F435352C1CE14C00178695 /* CategoryViewModel.swift in Sources */,
+				C4D5CBA72C25ACE600037894 /* LibraryPlayListViewController.swift in Sources */,
 				C4621E2B2BE30A8F009F621C /* WelcomeViewController.swift in Sources */,
 				C44225B52C16353800BD7A8D /* RecommendedTrackCellViewModel.swift in Sources */,
 				C435E6452C22F68F0048B29C /* PlaybackPresenter.swift in Sources */,
@@ -535,6 +553,7 @@
 				C40264D82BE306E8001914ED /* AppDelegate.swift in Sources */,
 				C40C44632BF110B400CB6526 /* ApiImageModel.swift in Sources */,
 				C4160B162BF8FF2200EB9B88 /* RecommendationsModel.swift in Sources */,
+				C4D5CBAB2C25C7FF00037894 /* LibraryToogleView.swift in Sources */,
 				C4565B6B2BED79260032D66C /* SettingsModel.swift in Sources */,
 				C4054A9B2C1AEB0E008D355F /* TitleHeaderCollectionReusableView.swift in Sources */,
 				C4621E392BE30B30009F621C /* MainViewController.swift in Sources */,
@@ -564,6 +583,7 @@
 				C40C44612BF0F7E900CB6526 /* NewReleasesModel.swift in Sources */,
 				C43FC2022C189AED002AE190 /* PlayListDetail.swift in Sources */,
 				C45758012C1C4E1800C9161D /* CategoryTopModel.swift in Sources */,
+				C4D5CBA92C25AD7600037894 /* LibraryAlbumsViewController.swift in Sources */,
 				C4A249822C147D3500B6017B /* FeaturedCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
