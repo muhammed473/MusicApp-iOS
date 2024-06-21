@@ -11,4 +11,5 @@ struct AlbumDetailViewModel {
     
     let name : String
     let artistName : String
+    let url : URL?
 }

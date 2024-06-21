@@ -77,7 +77,8 @@ class AlbumDetailViewController: UIViewController {
                     self?.tracks = model.tracks.items
                     self?.viewModels = model.tracks.items.compactMap({
                         AlbumDetailViewModel(name: $0.name,
-                                             artistName: $0.artists.first?.name ?? "--" )})
+                                             artistName: $0.artists.first?.name ?? "--" ,
+                                             url: URL(string: $0.album?.images.first?.url ?? "" ))})
                     self?.collectionView.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -134,7 +135,8 @@ class AlbumDetailViewController: UIViewController {
             collectionView.deselectItem(at: indexPath, animated: true)
             // Song Play
             
-            let track = tracks[indexPath.row]
+            var track = tracks[indexPath.row]
+            track.album = self.album
             PlaybackPresenter.shared.startPlayback(viewController: self, trackModel: track)
         }
         
@@ -147,6 +149,11 @@ class AlbumDetailViewController: UIViewController {
         
         func playListDetailHeaderProtocol(headerView: PlayListHeaderCollectionReusableView) {
             
+            let trackWithAlbum : [TracksModel] = tracks.compactMap({
+                var track = $0
+                track.album = self.album
+                return track
+            })
             PlaybackPresenter.shared.startPlayback(viewController: self, tracks: tracks)
         }
         

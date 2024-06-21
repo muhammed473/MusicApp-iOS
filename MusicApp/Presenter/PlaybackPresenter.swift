@@ -20,24 +20,22 @@ final class PlaybackPresenter{
     //  MARK: - Properties
     
     static let shared = PlaybackPresenter()
+    var playerVC : PlayerViewController?
     var avPlayer : AVPlayer?
     var playerQueue : AVQueuePlayer?
     private var trackModel : TracksModel?
     private var tracks = [TracksModel]()
+    var index = 0
     var currentTrack : TracksModel?{
         if let track = trackModel, tracks.isEmpty{
             return track
         }
         else if let playerQueue = self.playerQueue, !tracks.isEmpty{
-            let item = playerQueue.currentItem
-            let items = playerQueue.items()
-            guard let index = items.firstIndex(where: {$0 == item })else{
-                return nil
-            }
             return tracks[index]
         }
         return nil
     }
+    
     
     // MARK: - Assistants
     
@@ -55,7 +53,7 @@ final class PlaybackPresenter{
         viewController.present(UINavigationController(rootViewController: vc),animated: true) { [weak self]  in
             self?.avPlayer?.play()
         }
-        
+        self.playerVC = vc
     }
     
     func startPlayback(viewController : UIViewController,tracks : [TracksModel]){
@@ -82,6 +80,7 @@ final class PlaybackPresenter{
         vc.playerDataSourceProtocol = self
         vc.delegate = self
         viewController.present(UINavigationController(rootViewController: vc),animated: true)
+        self.playerVC = vc
     }
     
 }
@@ -131,10 +130,12 @@ extension PlaybackPresenter : PlayerViewControllerDelegate{
         
         if tracks.isEmpty{
             avPlayer?.pause()
-            
         }
         else if let playerQueue = playerQueue{
            playerQueue.advanceToNextItem() // Go next song.
+            index += 1
+            print(index)
+            playerVC?.refreshUI()
         }
     }
     
@@ -149,6 +150,7 @@ extension PlaybackPresenter : PlayerViewControllerDelegate{
             playerQueue?.removeAllItems()
             playerQueue = AVQueuePlayer(items: [firstItem]) // Go back to first song.
             playerQueue?.play()
+            playerQueue?.volume = 0.3
         }
     }
     

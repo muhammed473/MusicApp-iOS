@@ -66,6 +66,11 @@ class PlayerViewController: UIViewController {
                                                                         subTitle: playerDataSourceProtocol?.subTitle))
     }
     
+     func refreshUI(){
+         
+        configure()
+    }
+    
     // MARK: - Actions
     
     @objc func touchCloseButton(){

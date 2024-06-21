@@ -9,7 +9,7 @@ import Foundation
 
 struct TracksModel : Codable {
     
-    let album : Album?
+    var album : Album?
     let artists : [ArtistModel]
     let available_markets : [String]
     let disc_number : Int?
