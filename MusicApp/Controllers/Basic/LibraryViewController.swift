@@ -32,6 +32,7 @@ class LibraryViewController: UIViewController {
         scrollView.delegate = self
         scrollView.contentSize = CGSize(width: self.view.width * 2, height: scrollView.height)
         addChildrenViewControllers()
+        updateBarButtons()
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,7 +59,23 @@ class LibraryViewController: UIViewController {
         albumVc.didMove(toParent: self)
     }
     
+    private func updateBarButtons(){
+        
+        switch toogleView.state{
+        case .playlist:
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self,
+                                                                action: #selector(touchAdd))
+        case .album:
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
     // MARK: - Actions
+    
+    @objc func touchAdd(){
+        
+        playListVc.showCreatePlayListAlert()
+    }
 
 }
 
@@ -71,9 +88,11 @@ extension LibraryViewController : UIScrollViewDelegate{
      // print(scrollView.contentOffset.x) // 0 - 350
         if scrollView.contentOffset.x >= (view.width - 100){
             toogleView.update(state: .album)
+            updateBarButtons()
         }
         else{
             toogleView.update(state: .playlist)
+            updateBarButtons()
         }
     }
 }
@@ -85,11 +104,13 @@ extension LibraryViewController : ToogleViewDelegate{
     func touchPlayListButton(toogleView: LibraryToogleView) {
         
         scrollView.setContentOffset(.zero, animated: true)
+        updateBarButtons()
     }
     
     func touchAlbumButton(toogleView: LibraryToogleView) {
         
         scrollView.setContentOffset(CGPoint(x: view.width, y: 0), animated: true)
+        updateBarButtons()
     }
     
     

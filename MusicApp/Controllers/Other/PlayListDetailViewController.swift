@@ -142,7 +142,7 @@ extension PlayListDetailViewController : UICollectionViewDelegate,UICollectionVi
         let viewModel = PlayListDetailHeaderForViewModel(name: playList.name,
                                                          description: playList.description,
                                                          owner: playList.owner.display_name,
-                                                         imageForUrl: URL(string: playList.images.first?.url ?? "")
+                                                         imageForUrl: URL(string: playList.images?.first?.url ?? "")
         )
         headerView.configure(viewModel : viewModel)
         headerView.delegate = self

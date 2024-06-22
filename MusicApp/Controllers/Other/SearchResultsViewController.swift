@@ -133,7 +133,7 @@ extension SearchResultsViewController : UITableViewDelegate,UITableViewDataSourc
             else {
                 return UITableViewCell()
             }
-            let viewModel = SubTitleTableViewModel(title: model.name,imageUrl: URL(string: model.images.first?.url ?? ""),
+            let viewModel = SubTitleTableViewModel(title: model.name,imageUrl: URL(string: model.images?.first?.url ?? ""),
                                                    subTitle: model.owner.display_name)
             albumCell.configure(viewModel: viewModel)
             return albumCell

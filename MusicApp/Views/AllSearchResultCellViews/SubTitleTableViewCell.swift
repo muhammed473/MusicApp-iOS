@@ -69,7 +69,7 @@ class SubTitleTableViewCell : UITableViewCell {
     func configure(viewModel : SubTitleTableViewModel){
         
         label.text = viewModel.title
-        photoImageView.sd_setImage(with: viewModel.imageUrl)
+        photoImageView.sd_setImage(with: viewModel.imageUrl,placeholderImage: UIImage(systemName: "photo"))
         subTitlelabel.text = viewModel.subTitle
     }
 }

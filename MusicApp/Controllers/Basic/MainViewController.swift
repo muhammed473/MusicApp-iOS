@@ -175,7 +175,7 @@ class MainViewController: UIViewController {
         })))
         sections.append(.featuredPlayList(viewModels: playLists.compactMap({
             return FeaturedPlaylistCellViewModel(name: $0.name,
-                                                 featuredImageURL: URL(string: $0.images.first?.url ?? ""),
+                                                 featuredImageURL: URL(string: $0.images?.first?.url ?? ""),
                                                  creatorName: $0.owner.display_name)
         }) ))
         sections.append(.recommendationsPlayList(viewModels: tracks.compactMap({

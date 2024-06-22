@@ -92,7 +92,7 @@ extension CategoryForPlayListController : UICollectionViewDelegate,UICollectionV
         else{return UICollectionViewCell()}
         let playlists = self.playlists[indexPath.row]
         cell.configureFeatured(viewModel: FeaturedPlaylistCellViewModel(name: playlists.name,
-                                                                        featuredImageURL: URL(string: playlists.images.first?.url ?? "-"),
+                                                                        featuredImageURL: URL(string: playlists.images?.first?.url ?? "-"),
                                                                         creatorName: playlists.owner.display_name))
         return cell
     }
