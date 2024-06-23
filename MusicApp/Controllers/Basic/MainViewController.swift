@@ -60,7 +60,7 @@ class MainViewController: UIViewController {
         
         configureCollectionView()
         view.addSubview(spinner)
-      
+        addLongTapGesture()
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,7 +83,6 @@ class MainViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
     }
     
- 
     func fetchData(){
       
         let group = DispatchGroup()
@@ -186,7 +185,12 @@ class MainViewController: UIViewController {
         collectionView.reloadData()
     }
     
-     
+    private func addLongTapGesture(){
+        
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(touchLongPress))
+        collectionView.isUserInteractionEnabled = true
+        collectionView.addGestureRecognizer(gesture)
+    }
     
     // MARK: - Actions
     
@@ -196,6 +200,40 @@ class MainViewController: UIViewController {
         vc.title = "SETTİNGS"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func touchLongPress(gesture: UILongPressGestureRecognizer){
+        
+        guard gesture.state == .began else {return}
+        let touchPoint = gesture.location(in: collectionView)
+      //  print("PRİNT: Touch Point: \(touchPoint)")
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint),indexPath.section == 2
+        else{
+            return
+        }
+        let model = tracks[indexPath.row]
+        let actionSheet = UIAlertController(
+            title: model.name,
+            message: "Would you like to add this song to one of your playlists?",
+            preferredStyle: UIAlertController.Style.actionSheet
+        )
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel,handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Add to Playlist",style: .default,handler: {[weak self] _ in
+            DispatchQueue.main.async {
+                let vc = LibraryPlayListViewController()
+                vc.selectionHandler = { playlist in
+                    CallerApi.shared.addTrackToPlayList(track: model, playlistModel: playlist) { success in
+                        print("Added to playlist success : \(success)")
+                    }
+                }
+                vc.title = "Select Playlist"
+                self?.present(UINavigationController(rootViewController: vc),animated:true)
+            }
+            
+        }))
+        
+        present(actionSheet,animated: true)
+    
     }
 
 }
