@@ -33,6 +33,7 @@ class PlayListDetailViewController: UIViewController {
     }))
     private var viewModels = [RecommendedTrackCellViewModel]()
     private var tracks = [TracksModel]()
+    public var isOwner = false 
     
     // MARK: - Lifecycle
     
@@ -62,6 +63,8 @@ class PlayListDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
                                                             target: self,
                                                             action: #selector(touchShareButton))
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress(gesture:)))
+        collectionView.addGestureRecognizer(gesture)
     }
     
     override func viewDidLayoutSubviews() {
@@ -104,6 +107,36 @@ class PlayListDetailViewController: UIViewController {
         )
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func longPress(gesture : UILongPressGestureRecognizer){
+        
+        guard gesture.state == .began else {return}
+        let touchPoint = gesture.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint) else {return}
+        let currentTrack = tracks[indexPath.row]
+        let actionSheet = UIAlertController(title: currentTrack.name,
+                                            message: "Would you like to remove this from the playlist?",
+                                            preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Remove", style: .destructive, handler: { [weak self] _ in
+            guard let strongSelf = self else{
+                return
+            }
+            CallerApi.shared.removeTrackFromPlayList(track:currentTrack,playlistModel: strongSelf.playList){success in
+                DispatchQueue.main.async {
+                    if success{
+                        strongSelf.tracks.remove(at: indexPath.row)
+                        strongSelf.viewModels.remove(at: indexPath.row)
+                        strongSelf.collectionView.reloadData()
+                    }
+                    else{
+                        print("PRİNT: Failed to REMOVE")
+                    }
+                }
+            }
+        }))
+        present(actionSheet, animated: true,completion: nil)
     }
     
 }
