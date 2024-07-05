@@ -49,9 +49,6 @@ class AlbumDetailViewController: UIViewController {
         
         view.addSubview(collectionView)
         title = album.name
-    //    view.backgroundColor = .green
-        fetchAlbumDetails()
-        
         collectionView.register(AlbumTrackForCollectionViewCell.self, forCellWithReuseIdentifier: AlbumTrackForCollectionViewCell.identifier)
         collectionView.register(PlayListHeaderCollectionReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -59,6 +56,9 @@ class AlbumDetailViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.delegate = self
         collectionView.dataSource = self
+        fetchAlbumDetails()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
+                                                            target: self, action: #selector(didTapActions))
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,7 +68,7 @@ class AlbumDetailViewController: UIViewController {
     }
     
     // MARK: - Assistants
-    
+        
     func fetchAlbumDetails() {
         CallerApi.shared.getAlbumDetails(album: album) { [weak self] result in
             DispatchQueue.main.async {
@@ -85,6 +85,23 @@ class AlbumDetailViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // MARK: - Actions
+    
+   @objc func didTapActions(){
+        
+       let actionSheet = UIAlertController(title: album.name, message: "Actions", preferredStyle: .actionSheet)
+       actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+       actionSheet.addAction(UIAlertAction(title: "Save Album", style: .default, handler: { [weak self] _ in
+           guard let strongSelf = self else {return}
+           CallerApi.shared.saveAlbum(album: strongSelf.album) { success in
+               if success{
+                   NotificationCenter.default.post(name: .albumSavedNotification, object: nil)
+               }
+           }
+       }))
+        present(actionSheet, animated: true)
     }
     
 }

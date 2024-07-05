@@ -14,6 +14,7 @@ final class CallerApi {
     enum HttpMethod:String {
         case GET
         case POST
+        case PUT
         case DELETE
     }
     
@@ -181,6 +182,7 @@ final class CallerApi {
         }
     }
     
+    
     // MARK: - Featured PlayList Detail
     
     public func getFeaturedPlayListDetails(playLists : PlayListModels,completion: @escaping (Result<PlayListDetail,Error>) -> Void ){
@@ -267,16 +269,16 @@ final class CallerApi {
         
         createRequest(url: URL(string: Constants.baseApiUrl + "/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&type=album,artist,playlist,track&limit=10"),
                       type: .GET) { request in
-          
-         //   print("PRİNT: REQUEST : \(request.url?.absoluteString ?? "None")")
+            
+            //   print("PRİNT: REQUEST : \(request.url?.absoluteString ?? "None")")
             let task = URLSession.shared.dataTask(with: request) { data,_, error in
                 guard let data = data, error == nil else {
                     completion(.failure(ApiError.failedGetData))
                     return
                 }
                 do{
-                     /*let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                      print("PRİNT: SEARCH RESULT : \(json)") */
+                    /*let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                     print("PRİNT: SEARCH RESULT : \(json)") */
                     
                     let result  = try JSONDecoder().decode(SearchResponseModel.self, from: data)
                     var searchResultsModel : [SearchResultModel] = []
@@ -295,19 +297,20 @@ final class CallerApi {
         }
     }
     
-    // MARK: - All PlayLists Events
     
-    public func getCurrentUserPlayLists(completion:@escaping(Result<[PlayListModels],Error>) -> Void){
-        createRequest(url: URL(string: Constants.baseApiUrl+"/me/playlists/?limit=50"), type: .GET) { request in
+    // MARK: - Library For Current User Album
+    
+    public func getCurrentUserAlbums(completion: @escaping(Result<[Album],Error>) -> Void){
+        createRequest(url: URL(string:Constants.baseApiUrl + "/me/albums"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
                     completion(.failure(ApiError.failedGetData))
                     return
                 }
                 do{
-                    let result = try JSONDecoder().decode(LibraryPlaylistModel.self, from: data)
-                    print("PRİNT: getCurrentUserPlayLists : \(result)")
-                    completion(.success(result.items))
+                    let result = try JSONDecoder().decode(LibraryAlbumModel.self, from: data)
+                   // print("PRİNT: Get Current User Albums: \(result)")
+                    completion(.success(result.items.compactMap({$0.album})))
                 }
                 catch{
                     print(error)
@@ -317,7 +320,28 @@ final class CallerApi {
             }
             task.resume()
         }
+        
     }
+    
+    public func saveAlbum(album:Album,completion:@escaping(Bool) -> Void){
+        
+        createRequest(url: URL(string: Constants.baseApiUrl + "/me/albums?ids=\(album.id)") , type: .PUT) { baseRequest in
+            var request = baseRequest
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let code = (response as? HTTPURLResponse)?.statusCode,error == nil
+                else {
+                    completion(false)
+                    return
+                }
+                print("PRİNT : CODE : \(code)")
+                completion(code == 200)
+            }
+            task.resume()
+        }
+    }
+    
+    // MARK: - All PlayLists Events
     
     public func createPlaylist(name:String,completion:@escaping(Bool) -> Void){
         
@@ -363,6 +387,28 @@ final class CallerApi {
             
         }
          
+    }
+    
+    public func getCurrentUserPlayLists(completion:@escaping(Result<[PlayListModels],Error>) -> Void){
+        createRequest(url: URL(string: Constants.baseApiUrl+"/me/playlists/?limit=50"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(ApiError.failedGetData))
+                    return
+                }
+                do{
+                    let result = try JSONDecoder().decode(LibraryPlaylistModel.self, from: data)
+                   // print("PRİNT: getCurrentUserPlayLists : \(result)")
+                    completion(.success(result.items))
+                }
+                catch{
+                    print(error)
+                    completion(.failure(error))
+                }
+                
+            }
+            task.resume()
+        }
     }
     
     public func addTrackToPlayList(track:TracksModel,playlistModel:PlayListModels,completion:@escaping(Bool) -> Void){
