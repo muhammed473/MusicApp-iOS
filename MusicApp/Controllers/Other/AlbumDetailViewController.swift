@@ -99,6 +99,9 @@ class AlbumDetailViewController: UIViewController {
                if success{
                    NotificationCenter.default.post(name: .albumSavedNotification, object: nil)
                }
+               else{
+                   HapticsDirector.shared.vibrate(type: .error)
+               }
            }
        }))
         present(actionSheet, animated: true)

@@ -133,6 +133,7 @@ extension SearchViewController : UICollectionViewDelegate,UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        HapticsDirector.shared.vibrateForSelection()
         let categoryModel = self.allCategoryModel[indexPath.row]
         let vc = CategoryForPlayListController(categoryModel: categoryModel)
         navigationController?.pushViewController(vc, animated: true)

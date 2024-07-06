@@ -133,7 +133,7 @@ extension LibraryAlbumsViewController : UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        HapticsDirector.shared.vibrateForSelection()
         let album = albums[indexPath.row]
        
         let vc = AlbumDetailViewController(album: album)
