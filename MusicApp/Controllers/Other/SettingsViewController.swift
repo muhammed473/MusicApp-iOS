@@ -63,6 +63,24 @@ class SettingsViewController: UIViewController {
     
     private func touchSignOut() {
         
+        let alert = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { _ in
+            AuthDirector.shared.signOut { [weak self] signedOut in
+                if signedOut{
+                    DispatchQueue.main.async {
+                        let navVC  = UINavigationController(rootViewController: WelcomeViewController())
+                        navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
+                        navVC.navigationBar.prefersLargeTitles = true
+                        navVC.modalPresentationStyle = .fullScreen
+                        self?.present(navVC, animated: true,completion: {
+                            self?.navigationController?.popViewController(animated: false)
+                        })
+                    }
+                }
+            }
+        }))
+        present(alert, animated: true)
     }
     
 }
